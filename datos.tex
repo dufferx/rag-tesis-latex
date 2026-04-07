@@ -1,0 +1,274 @@
+\usepackage{array}
+\usepackage{listings}
+% ================================================================
+% Configuración de bloques de código (listings) para el instructivo
+% ================================================================
+% ===== Configuración básica para listings =====
+\usepackage{listings}
+
+\lstdefinestyle{ucaCode}{
+  backgroundcolor=\color{backcolour},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{codeblue},
+  commentstyle=\itshape\color{codegray},
+  stringstyle=\color{codered},
+  numbers=left,
+  numberstyle=\tiny\color{codegray},
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  rulecolor=\color{codegray},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showstringspaces=false,
+  captionpos=b
+}
+\lstset{style=ucaCode}
+
+\input{comandos}
+%\usepackage{showframe} % Paquete para mostrar márgenes del documento
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+% ================================================================
+%            Sección editable para primera portada
+% ================================================================
+% =============== NO MODIFICAR LOS COMANDOS ======================
+% ================================================================
+
+\newcommand{\titulo}{} %Título del trabajo
+
+% Carrera - [comando correspondiente]:
+% 1. Ingeniería Informática - informatica
+% 2. Ingeniería Civil - civil
+% 3. Ingeniería Eléctrica - electrica
+% 4. Ingeniería Energética - energetica
+% 5. Ingeniería de Alimentos - alimentos
+% 6. Ingeniería Química -quimica
+% 7. Ingeniería Mecanica - mecanica
+% 8. Ingeniería Industrial - industrial
+% 9. Arquitectura - arquitectura
+% 10. Licenciatura en Diseño - diseño
+
+\newcommand{\carreraUno}{}
+%\newcommand{\carreraDos}{energetica}
+%\newcommand{\carreraTres}{industrial}
+
+\autor{Autor 1}{M}{carreraUno} % Autor 1
+\autor{}{}{} % Autor 2 (opcional)
+\autor{}{}{} % Autor 3 (opcional)
+\autor{}{}{} % Autor 4 (opcional)
+
+\newcommand{\mesdegraduacion}{Mayo 2026} % Mes y año de graduación
+
+%================================================================
+%            Sección editable para segunda portada
+% ===============================================================
+% ================ NO MODIFICAR LOS COMANDOS ====================
+% ===============================================================
+
+\newcommand{\rector}{Mario Ernesto Cornejo Mena, S.J.}% Nombre del rector
+\newcommand{\sexoRector}{masculino} % Sexo del secretario o secretaria general
+\newcommand{\secretarioGeneral}{Lidia Gabriela Bolaños Teodoro} % Nombre del secretario o secretaria general
+\newcommand{\sexoSecretario}{femenino} % Sexo del secretario o secretaria general
+\newcommand{\decano}{Carlos Ernesto Rivas Cerna} % Nombre del decano de la facultad de ingeniería y arquitectura
+\newcommand{\sexoDecano}{masculino} % Sexo del secretario o secretaria general
+\newcommand{\directorDeCarrera}{ingresar nombre del director de carrera} % Director de la carrera
+\newcommand{\carreraDirectorDeCarrera}{ingresar la carrera} % Carrera del director de carrera
+\newcommand{\sexoDirectorDeCarrera}{masculino} % Sexo del director de carrera
+% Segundo director de carrera (opcional, para segunda carrera)
+\newcommand{\directorDeCarreraDos}{} % Nombre del segundo director de carrera (dejar vacío si no aplica)
+\newcommand{\carreraDirectorDeCarreraDos}{} % Carrera del segundo director
+\newcommand{\sexoDirectorDeCarreraDos}{} % Sexo del segundo director de carrera
+\newcommand{\directorDeTrabajo}{nombre de director de trabajo} % Director del trabajo de graduación
+\newcommand{\sexoDirectorDeTrabajo}{masculino} % Sexo del secretario o secretaria general
+\newcommand{\lector}{nombre del lector} % Nombre del lector o lectora
+\newcommand{\sexoLector}{masculino} % Sexo del lector o lectora
+
+%=================================================================
+%            Sección editable para agradecimientos
+% ================================================================
+% ================ NO MODIFICAR LOS COMANDOS =====================
+% ================================================================
+
+\newcommand{\agradecimiento}{
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+} % Agradecimientos
+
+%=================================================================
+%               Sección editable para dedicatorias
+% ================================================================
+% ================= NO MODIFICAR LOS COMANDOS ====================
+% ================================================================
+
+\newcommand{\dedicatoriaautorA}{}% Dedicatoria del autor A, ingresar solo si se ingreso "true" en el comando "porcadaestudiante".
+
+\newcommand{\dedicatoriaautorB}{}%}% Dedicatoria del autor B, ingresar solo si se ingreso "false" en el comando "porcadaestudiante".
+
+\newcommand{\dedicatoriaautorC}{}%}% Dedicatoria del autor C, ingresar solo si se ingreso "false" en el comando "porcadaestudiante".
+
+\newcommand{\dedicatoriaautorD}{}%}% Dedicatoria del autor D, ingresar solo si se ingreso "false" en el comando "porcadaestudiante".
+
+%=================================================================
+%                   Sección editable para resumen
+% ================================================================
+% ================== NO MODIFICAR LOS COMANDOS ===================
+% ================================================================
+
+\newcommand{\resumen}{
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+
+In malesuada aliquet orci ac rutrum. Donec dignissim lectus eu ante venenatis semper. Aliquam leo ligula, vehicula ac sagittis non, consectetur nec dui. Pellentesque at arcu diam. Aliquam dignissim condimentum auctor. Nulla vehicula et quam vitae scelerisque. Phasellus bibendum posuere egestas. Donec vel nunc massa. Etiam posuere est urna, eu bibendum mauris semper ut. Suspendisse rutrum purus in metus tristique, nec sagittis arcu posuere. Vestibulum tempus pellentesque est sit amet eleifend. Phasellus fringilla neque nec est mattis, sed varius nisi tristique. Pellentesque ullamcorper massa ut orci rutrum pretium.
+
+Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+
+Morbi blandit molestie lectus non tincidunt. Nam id imperdiet nisi. Proin sed risus vehicula, malesuada tellus nec, dapibus magna. Cras vitae dolor lorem. Morbi vel arcu sit amet dolor auctor facilisis ac nec arcu. Pellentesque congue vulputate ligula, ac tempus metus porttitor sit amet. Aliquam egestas ultricies cursus. Mauris sit amet blandit elit. Cras ac nunc et enim aliquam efficitur. Suspendisse potenti. Integer accumsan turpis ut posuere hendrerit.
+
+Vestibulum vel nisi turpis. Donec pellentesque odio sodales, facilisis elit ac, finibus libero. Maecenas in turpis eget sapien volutpat finibus sed a turpis. In a aliquet magna. Nullam et molestie tellus. In bibendum nunc tortor, eget malesuada turpis tincidunt vitae. Praesent non nulla semper ligula euismod facilisis ac at mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam non faucibus dolor. In hac habitasse platea dictumst. Sed accumsan rutrum fringilla. In ac magna nunc. Praesent ac convallis magna.
+}
+
+%=================================================================
+%                  Sección editable para siglas
+% ================================================================
+% ================== NO MODIFICAR LOS COMANDOS ===================
+% ================================================================
+
+\itemsiglas{FIA}{Facultad de Ingeniería y Arquitectura}
+\itemsiglas{UCA}{Universidad Centroamericana José Simeón Cañas}
+
+
+%=================================================================
+%                 Sección editable para abreviaturas
+% ================================================================
+% ================== NO MODIFICAR LOS COMANDOS ===================
+% ================================================================
+
+\itemabreviatura{Abreviaturas}{}
+
+%=================================================================
+%               Sección editable para nomenclatura
+% ================================================================
+% ================== NO MODIFICAR LOS COMANDOS ===================
+% ================================================================
+
+\itemnomenclatura{Nomenclatura}{}
+
+%=================================================================
+%          Sección editable para capítulo de introducción
+% ================================================================
+% ================== NO MODIFICAR LOS COMANDOS ==================
+% ===============================================================
+
+\newenvironment{planteamientodelproblema}{}{
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+
+    In malesuada aliquet orci ac rutrum. Donec dignissim lectus eu ante venenatis semper. Aliquam leo ligula, vehicula ac sagittis non, consectetur nec dui. Pellentesque at arcu diam. Aliquam dignissim condimentum auctor. Nulla vehicula et quam vitae scelerisque. Phasellus bibendum posuere egestas. Donec vel nunc massa. Etiam posuere est urna, eu bibendum mauris semper ut. Suspendisse rutrum purus in metus tristique, nec sagittis arcu posuere. Vestibulum tempus pellentesque est sit amet eleifend. Phasellus fringilla neque nec est mattis, sed varius nisi tristique. Pellentesque ullamcorper massa ut orci rutrum pretium.
+    
+    Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+    
+    Morbi blandit molestie lectus non tincidunt. Nam id imperdiet nisi. Proin sed risus vehicula, malesuada tellus nec, dapibus magna. Cras vitae dolor lorem. Morbi vel arcu sit amet dolor auctor facilisis ac nec arcu. Pellentesque congue vulputate ligula, ac tempus metus porttitor sit amet. Aliquam egestas ultricies cursus. Mauris sit amet blandit elit. Cras ac nunc et enim aliquam efficitur. Suspendisse potenti. Integer accumsan turpis ut posuere hendrerit.
+    
+    Vestibulum vel nisi turpis. Donec pellentesque odio sodales, facilisis elit ac, finibus libero. Maecenas in turpis eget sapien volutpat finibus sed a turpis. In a aliquet magna. Nullam et molestie tellus. In bibendum nunc tortor, eget malesuada turpis tincidunt vitae. Praesent non nulla semper ligula euismod facilisis ac at mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam non faucibus dolor. In hac habitasse platea dictumst. Sed accumsan rutrum fringilla. In ac magna nunc. Praesent ac convallis magna.
+    
+}
+
+\newenvironment{antecedentes}{
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+
+In malesuada aliquet orci ac rutrum. Donec dignissim lectus eu ante venenatis semper. Aliquam leo ligula, vehicula ac sagittis non, consectetur nec dui. Pellentesque at arcu diam. Aliquam dignissim condimentum auctor. Nulla vehicula et quam vitae scelerisque. Phasellus bibendum posuere egestas. Donec vel nunc massa. Etiam posuere est urna, eu bibendum mauris semper ut. Suspendisse rutrum purus in metus tristique, nec sagittis arcu posuere. Vestibulum tempus pellentesque est sit amet eleifend. Phasellus fringilla neque nec est mattis, sed varius nisi tristique. Pellentesque ullamcorper massa ut orci rutrum pretium.
+
+Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+}{}
+
+\newenvironment{alcances}{}{
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+
+In malesuada aliquet orci ac rutrum. Donec dignissim lectus eu ante venenatis semper. Aliquam leo ligula, vehicula ac sagittis non, consectetur nec dui. Pellentesque at arcu diam. Aliquam dignissim condimentum auctor. Nulla vehicula et quam vitae scelerisque. Phasellus bibendum posuere egestas. Donec vel nunc massa. Etiam posuere est urna, eu bibendum mauris semper ut. Suspendisse rutrum purus in metus tristique, nec sagittis arcu posuere. Vestibulum tempus pellentesque est sit amet eleifend. Phasellus fringilla neque nec est mattis, sed varius nisi tristique. Pellentesque ullamcorper massa ut orci rutrum pretium.
+
+Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+}
+\newenvironment{limitaciones}{}{
+    \begin{itemize}
+        \item
+        Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+    \end{itemize}
+}
+\newenvironment{objetivogeneral}{}{
+    Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+}
+\newenvironment{objetivosespecificos}{}{
+    \begin{itemize}
+        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    \end{itemize}
+}
+
+
+%=================================================================
+%                Sección editable para capítulos
+% ================================================================
+% ================= NO MODIFICAR LOS COMANDOS ====================
+% ================================================================
+
+\newcommand{\capitulos}{
+
+\capitulo{Marco Teórico}{
+
+}
+
+\capitulo{Metodología}{
+
+}
+
+
+\capitulo{Análisis de resultados}{
+    
+}
+}
+
+%=================================================================
+%       Sección editable para conclusiones y recomendaciones
+% ================================================================
+% ================= NO MODIFICAR LOS COMANDOS ===================
+% ================================================================
+
+\newenvironment{conclusiones}{
+    
+}{}
+
+\newenvironment{recomendaciones}{
+       
+}{}
+
+%=================================================================
+%                Sección editable para glosario
+% ================================================================
+% ================= NO MODIFICAR LOS COMANDOS ====================
+% ================================================================
+
+\newcommand{\mostrarglosario}{false}
+
+%=================================================================
+%                    Sección editable para anexos
+% ===============================================================
+% ================== NO MODIFICAR LOS COMANDOS ==================
+% ================================================================
+
+\newcommand{\anexos}{
+
+    \anexo{Primer anexo}{
+        
+    }
+
+    \anexo{Segundo anexo}{
+       
+    }
+
+    \anexo{Tercer anexo}{
+        
+    }
+    
+
+}

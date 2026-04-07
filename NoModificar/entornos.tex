@@ -1,0 +1,914 @@
+% carreraDos%===========================CONTADORES===========================%
+
+%Se crea nuevo contador que se utiliza para añadir numero de capitulo al epigrafe de las imagenes
+\newcounter{numerocapitulo}
+
+%Se estáblece 1 como el valor inicial del contador
+\setcounter{numerocapitulo}{1}
+
+%Se crea contador para escribir la letra del anexo correspondiente en los epigrafes de las imagenes
+\newcounter{numeroimagenesanexos}
+
+%Se crea contador para guardar el numero de pagina de incio del agradecimiento
+\newcounter{agradecimientoinicio}
+
+%Se crea contador para guardar el numero de pagina final del agradecimiento
+\newcounter{agradecimientofinal}
+
+%Se crea contador para guardar la diferencia entre la pagina final y la pagina inicial del agradecimiento y determinar cuantas paginas ocupa el agradecimiento
+\newcounter{agradecimientodiferencia}
+
+%Se crea contador para guardar el numero de pagina de incio de cada una de las dedicatorias
+\newcounter{dedicatoriasimpleinicio}
+
+
+%Se crea contador para guardar el numero de pagina final de cada dedicatoria
+\newcounter{dedicatoriasimplefinal}
+
+%Se crea contador para guardar la diferencia entre la pagina final y la pagina inicial de cada una de las dedicatorias y determinar cuantas paginas ocupa cada dedicatoria
+\newcounter{dedicatoriasimplediferencia}
+
+%Se crea un contador para almacenar el valor de la pagina inicial del resumen
+\newcounter{resumeninicio}
+
+%Se crea un contador para almacenar el valor de la pagina final
+\newcounter{resumenfinal}
+
+%Se crea un nuevo contador que almacena el valor de la diferencia de la pagina final menos la pagina inicial
+\newcounter{resumendiferencia}
+
+%============Creacion de todos los glosarios necesarios==========%
+
+% Siglas
+\newglossary*{siglas}{SIGLAS}
+
+% Abreviaturas
+\newglossary*{abreviaturas}{ABREVIATURAS}
+
+%Nomenclatura
+\newglossary*{nomenclatura}{NOMENCLATURA}
+
+%Glosario
+\newglossary*{glosario}{GLOSARIO}
+
+%Es necesario escribir \makeglossaries para crear glosarios
+\makenoidxglossaries
+
+%================Inportacion de archivos necesarios==============%
+
+\input{datos.tex}
+
+%============================ENTORNOS============================%
+
+% Entorno que contendra las secciones que llevan numeracion romana
+\newenvironment{romanos}{
+    \paroimpar{\value{page}}
+    \pagenumbering{roman}
+}{
+}
+
+
+
+% Entorno que contendra las secciones que llevan numeracion arabiga
+\newenvironment{arabigos}{
+    \paroimpar{\value{page}}
+    \pagenumbering{arabic}
+}{
+}
+
+
+%Creacion de entorno "portadas" que funciona para las dos portadas
+\newenvironment{portadas}{
+    \thispagestyle{empty}
+    \begin{center}
+    \fontsize{14}{21}\selectfont % 14pt con interlineado 21pt (≈ 1.5)
+    \setlength{\parskip}{0pt}    % espaciado antes/después = 0
+    \setlength{\parindent}{0pt}  % sin sangría
+}{
+    \end{center}
+    \newpage
+}
+
+
+%Creacion de entorno "primera portada" que utiliza el entorno "portadas"
+\newenvironment{primeraportada}{
+
+    % Se utiliza el entono "portadas" previamente creado
+    \begin{portadas}
+        %NOMBRE DE LA UNIVERSIDAD
+        UNIVERSIDAD CENTROAMERICANA\\
+        JOSÉ SIMEÓN CAÑAS\\
+        
+        \vspace{1.5\baselineskip}
+        
+        %LOGO DE LA UCA
+        \begin{figure}[H] % El argumento [H] fuerza la posición exacta
+            \centering
+            \includegraphics[height=2.5cm]{img/Logo_UCA_2015.jpg}
+        \end{figure}
+        \vspace{0.8\baselineskip}
+
+        
+        %TÍTULO DE LA TESIS
+        \verificarvacio{\titulo}{ERROR: No se ha ingresado el título}{ERROR: El comando título no está definido}
+
+        \vspace*{\fill}
+        
+        %FACULTAD
+        TRABAJO DE GRADUACIÓN PREPARADO PARA LA\\ FACULTAD DE INGENIERÍA Y ARQUITECTURA\\
+        \vspace*{\fill}
+        
+        %GRADO PRIMERA CARRERA     
+        \ifthenelse{\equal{\autorAnombre}{} \AND \equal{\autorBnombre}{} \AND \equal{\autorCnombre}{} \AND \equal{\autorDnombre}{}}{\textcolor{red}{\MakeUppercase{ERROR: No se ha ingresado ningún integrante del grupo\\}} \vspace*{\fill}}{
+        
+        \verificarsexoautores
+        
+        \ifthenelse{\equal{\value{contadormujerescarrerauno}}{0} \and \equal{\value{contadorhombrescarrerauno}}{0}}{}{
+        \ifdefined\carreraUno
+            \ifthenelse{\equal{\carreraUno}{}}{
+                \textcolor{red}{\MakeUppercase{ERROR: No se ha ingresado el nombre de la carrera}}
+            }
+            {PARA OPTAR AL GRADO DE\\ \determinarcarrera{\carreraUno}{2}{\value{resultadosexosautorescarrerauno}}}
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando carreraUno no esta definido}}
+        \fi
+        
+        \vspace*{\fill}
+
+        %ESTUDIANTES PRIMERA CARRERA
+        POR:\\
+
+        \ifthenelse{\equal{\autorAcarrera}{carreraUno}}{\ifthenelse{\equal{\autorAnombre}{}}{}{\MakeUppercase{\autorAnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorBcarrera}{carreraUno}}{\ifthenelse{\equal{\autorBnombre}{}}{}{\MakeUppercase{\autorBnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorCcarrera}{carreraUno}}{\ifthenelse{\equal{\autorCnombre}{}}{}{\MakeUppercase{\autorCnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorDcarrera}{carreraUno}}{\ifthenelse{\equal{\autorDnombre}{}}{}{\MakeUppercase{\autorDnombre}\\}}{}
+
+        \vspace*{\fill}
+        }
+
+        %GRADO SEGUNDA CARRERA
+        \ifthenelse{\equal{\value{contadormujerescarrerados}}{0} \and \equal{\value{contadorhombrescarrerados}}{0}}{}{
+        \ifdefined\carreraDos
+            \ifthenelse{\equal{\carreraDos}{}}{
+                \textcolor{red}{\MakeUppercase{ERROR: No se ha ingresado el nombre de la carrera}}
+            }
+                {PARA OPTAR AL GRADO DE\\ \determinarcarrera{\carreraDos}{2}{\value{resultadosexosautorescarrerados}}}
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando carreraDos no esta definido}}
+        \fi
+
+        \vspace*{\fill}
+
+        %ESTUDIANTES SEGUNDA CARRERA
+        POR:\\
+
+        \ifthenelse{\equal{\autorAcarrera}{carreraDos}}{\ifthenelse{\equal{\autorAnombre}{}}{}{\MakeUppercase{\autorAnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorBcarrera}{carreraDos}}{\ifthenelse{\equal{\autorBnombre}{}}{}{\MakeUppercase{\autorBnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorCcarrera}{carreraDos}}{\ifthenelse{\equal{\autorCnombre}{}}{}{\MakeUppercase{\autorCnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorDcarrera}{carreraDos}}{\ifthenelse{\equal{\autorDnombre}{}}{}{\MakeUppercase{\autorDnombre}\\}}{}
+
+        \vspace*{\fill}
+        }
+
+        %GRADO TERCERA CARRERA
+        \ifthenelse{\equal{\value{contadormujerescarreratres}}{0} \and \equal{\value{contadorhombrescarreratres}}{0}}{}{
+        \ifdefined\carreraTres
+            \ifthenelse{\equal{\carreraTres}{}}{
+                \textcolor{red}{\MakeUppercase{ERROR: No se ha ingresado el nombre de la carrera}}
+            }
+                {PARA OPTAR AL GRADO DE\\ \determinarcarrera{\carreraTres}{2}{\value{resultadosexosautorescarreratres}}}
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando carreraTres no esta definido}}
+        \fi
+
+        \vspace*{\fill}
+
+        %ESTUDIANTES TERCERA CARRERA
+        POR:\\
+
+        \ifthenelse{\equal{\autorAcarrera}{carreraTres}}{\ifthenelse{\equal{\autorAnombre}{}}{}{\MakeUppercase{\autorAnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorBcarrera}{carreraTres}}{\ifthenelse{\equal{\autorBnombre}{}}{}{\MakeUppercase{\autorBnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorCcarrera}{carreraTres}}{\ifthenelse{\equal{\autorCnombre}{}}{}{\MakeUppercase{\autorCnombre}\\}}{}
+
+        \ifthenelse{\equal{\autorDcarrera}{carreraTres}}{\ifthenelse{\equal{\autorDnombre}{}}{}{\MakeUppercase{\autorDnombre}\\}}{}
+        
+        \vspace*{\fill}
+        }
+        }
+        
+        
+        %FECHA
+        \verificarvacio{\mesdegraduacion}{ERROR: No se ha ingresado la fecha de graduacion}{ERROR: El comando fecha no está definido}\\
+        
+        % UBICACION DE LA UNIVERSIDAD
+        ANTIGUO CUSCATLÁN, EL SALVADOR, C.A.
+        \vspace{-8.25pt}
+        }
+{
+    \end{portadas} %Se termina entorno de portadas
+}
+
+%Se crea nuevo entorno "segunda portada" que utiliza el entorno "portadas"
+\newenvironment{segundaportada}{
+    % Se utiliza el entono "portadas" previamente creado
+    \begin{portadas}
+    
+        %SEXO DEL RECTOR O RECTORA
+        \ifdefined\sexoRector
+            \ifthenelse{\equal{\sexoRector}{}}{\textcolor{red}{
+            \MakeUppercase{ERROR: No se ha ingresado el sexo del rector}}}{
+                \ifthenelse{\equal{\sexoRector}{masculino}}{
+                    \MakeUppercase{rector}
+                }{
+                    \ifthenelse{\equal{\sexoRector}{femenino}}{
+                        \MakeUppercase{rectora}
+                    }{
+                        \textcolor{red}{
+                            \MakeUppercase{ERROR: El sexo del rector solo puede ser "masculino" o "femenino"}
+                        }
+                    }
+                }
+            }\par
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: el comando sexoRector no está definido}}
+        \fi
+
+        %NOMBRE DEL RECTOR
+        \verificarvacio{\rector}{ERROR: No se ha ingresado el nombre del rector}{ERROR: El comando rector no está definido}\par
+        \vspace*{\fill}
+        
+        %SEXO DEL SECRETARIO O SECRETARIA
+        \ifdefined\sexoSecretario
+            \ifthenelse{\equal{\sexoSecretario}{}}{\textcolor{red}{
+            \MakeUppercase{ERROR: No se ha ingresado el sexo del secretario general}}}{
+                \ifthenelse{\equal{\sexoSecretario}{masculino}}{
+                    \MakeUppercase{Secretario general}
+                }{
+                    \ifthenelse{\equal{\sexoSecretario}{femenino}}{
+                        \MakeUppercase{Secretaria general}
+                    }{
+                        \textcolor{red}{
+                            \MakeUppercase{ERROR: El sexo del secretario solo puede ser "masculino" o "femenino"}
+                        }
+                    }
+                }
+            }\par
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando sexoSecretario no está definido}}
+        \fi
+        
+        %NOMBRE DEL SECRETARIO O SECRETARIA
+        \verificarvacio{\secretarioGeneral}{ERROR: No se ha ingresado el nombre del secretario general}{ERROR: El comando secretarioGeneral no está definido}\par
+        \vspace*{\fill}
+        
+        %SEXO DEL DECANO O DECANA
+        \ifdefined\sexoDecano
+            \ifthenelse{\equal{\sexoDecano}{}}{\textcolor{red}{
+            \MakeUppercase{ERROR: No se ha ingresado el sexo del decano}}}{
+                \ifthenelse{\equal{\sexoDecano}{masculino}}{
+                    \MakeUppercase{decano de la facultad de ingeniería y arquitectura}
+                }{
+                    \ifthenelse{\equal{\sexoDecano}{femenino}}{
+                        \MakeUppercase{decana de la facultad de ingeniería y arquitectura}
+                    }{
+                        \textcolor{red}{
+                            \MakeUppercase{ERROR: El sexo del decano solo puede ser "masculino" o "femenino"}
+                        }
+                    }
+                }
+            }\par
+         \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando sexoDecano no está definido}}\par
+        \fi
+
+        %NOMBRE DEL DECANO
+        \verificarvacio{\decano}{ERROR: No se ha ingresado el nombre del decano}{ERROR: El comando decano no está definido}\par
+        \vspace*{\fill}
+        
+        % PRIMER DIRECTOR DE CARRERA
+        %SEXO DEL DIRECTOR DE LA CARRERA
+        \ifdefined\sexoDirectorDeCarrera
+            \ifthenelse{\equal{\sexoDirectorDeCarrera}{}}{\textcolor{red}{
+            \MakeUppercase{ERROR: No se ha ingresado el sexo del director de la carrera}}}{
+                \ifthenelse{\equal{\sexoDirectorDeCarrera}{masculino}}{
+                    DIRECTOR DE LA CARRERA DE\determinarcarrera{\carreraDirectorDeCarrera}{1}{1}
+                }{
+                    \ifthenelse{\equal{\sexoDirectorDeCarrera}{femenino}}{
+                        DIRECTORA DE LA CARRERA DE\determinarcarrera{\carreraDirectorDeCarrera}{1}{1}
+                    }{
+                        \textcolor{red}{
+                            \MakeUppercase{ERROR: El sexo del director de carrera solo puede ser "masculino" o "femenino"}
+                        }
+                    }
+                }
+            }
+            \par
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando sexoDirectorDeCarrera no está definido}}\par
+        \fi
+
+        %NOMBRE DEL DIRECTOR DE CARRERA
+        \verificarvacio{\directorDeCarrera}{ERROR: No se ha ingresado el nombre del director de carrera}{ERROR: El comando directorDeCarrera no está definido}\par
+
+        % SEGUNDO DIRECTOR DE CARRERA (OPCIONAL, PARA SEGUNDA CARRERA)
+        \ifthenelse{\equal{\directorDeCarreraDos}{}}{}{%
+            %SEXO DEL SEGUNDO DIRECTOR DE LA CARRERA
+            \ifthenelse{\equal{\sexoDirectorDeCarreraDos}{}}{\textcolor{red}{
+                \MakeUppercase{ERROR: No se ha ingresado el sexo del segundo director de la carrera}}}{%
+                \ifthenelse{\equal{\sexoDirectorDeCarreraDos}{masculino}}{%
+                    DIRECTOR DE LA CARRERA DE\determinarcarrera{\carreraDirectorDeCarreraDos}{1}{1}%
+                }{%
+                    \ifthenelse{\equal{\sexoDirectorDeCarreraDos}{femenino}}{%
+                        DIRECTORA DE LA CARRERA DE\determinarcarrera{\carreraDirectorDeCarreraDos}{1}{1}%
+                    }{%
+                        \textcolor{red}{%
+                            \MakeUppercase{ERROR: El sexo del segundo director de carrera solo puede ser "masculino" o "femenino"}%
+                        }%
+                    }%
+                }%
+            }\par
+            %NOMBRE DEL SEGUNDO DIRECTOR DE CARRERA
+            \verificarvacio{\directorDeCarreraDos}{ERROR: No se ha ingresado el nombre del segundo director de carrera}{ERROR: El comando directorDeCarreraDos no está definido}\par
+        }%
+
+        \vspace*{\fill}
+        
+        %DIRECTOR DEL TRABAJO
+        % (aquí continúa exactamente lo que ya tenías)
+
+        
+        %DIRECTOR DEL TRABAJO
+        \ifdefined\sexoDirectorDeTrabajo
+            \ifthenelse{\equal{\sexoDirectorDeTrabajo}{}}{\textcolor{red}{
+            \MakeUppercase{ERROR: No se ha ingresado el sexo del director del trabajo}}}{
+                \ifthenelse{\equal{\sexoDirectorDeTrabajo}{masculino}}{
+                    \MakeUppercase{Director del trabajo}
+                }{
+                    \ifthenelse{\equal{\sexoDirectorDeTrabajo}{femenino}}{
+                        \MakeUppercase{Directora del trabajo}
+                    }{
+                        \textcolor{red}{
+                            \MakeUppercase{ERROR: El sexo del director del trabajo solo puede ser "masculino" o "femenino"}
+                        }
+                    }
+                }
+            }\par
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando sexoDirectorDeTrabajo no está definido}}\par
+        \fi
+
+        %NOMBRE DEL DIRECTOR DE TRABAJO DE GRADUACION
+        \verificarvacio{\directorDeTrabajo}{ERROR: No se ha ingresado el nombre del director del trabajo}{ERROR: El comando directorDeTrabajo no está definido}\\
+        \vspace*{\fill}
+        
+        %SEXO DEL LECTOR O LECTORA
+        \ifdefined\sexoLector
+            \ifthenelse{\equal{\sexoLector}{}}{\textcolor{red}{
+            \MakeUppercase{ERROR: No se ha ingresado el sexo del lector}}}{
+                \ifthenelse{\equal{\sexoLector}{masculino}}{
+                    \MakeUppercase{lector}
+                }{
+                    \ifthenelse{\equal{\sexoLector}{femenino}}{
+                        \MakeUppercase{lectora}
+                    }{
+                        \textcolor{red}{
+                            \MakeUppercase{ERROR: El sexo del lector solo puede ser "masculino" o "femenino"}
+                        }
+                    }
+                }
+            }\par
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: El comando sexoLector no está definido}}\par
+        \fi
+        
+        %NOMBRE DEL LECTOR O LECTORA
+        \verificarvacio{\lector}{ERROR:No se ha ingresado el nombre del lector}{ERROR: El comando lector no está definido}\par
+        }
+{
+    \end{portadas} %Se termina entorno de portadas
+}
+
+% Se crea el entorno que se utilizara para el agradecimiento
+\newenvironment{agradecimientoentorno}{
+    %Se valida si el comando agradecimiento está definido
+    \ifdefined\agradecimiento
+        %Se valida si el comando agradecimiento está vacío
+        \ifthenelse{\equal{\agradecimiento}{}}{}{
+        \thispagestyle{empty} % Oculta el numero de pagina
+        
+        {\centering\textbf{AGRADECIMIENTOS}\par} % Título en negrita y mayúsculas
+        
+        \setcounter{agradecimientoinicio}{\value{page}}
+        
+        \agradecimiento % Muestra el agradecimiento si está presente
+        
+        \setcounter{agradecimientofinal}{\value{page}}
+        
+         \setcounter{agradecimientodiferencia}{\value{agradecimientofinal}}
+         
+        \addtocounter{agradecimientodiferencia}{-\value{agradecimientoinicio}}
+
+         %Validar si el agradecimiento ocupa mas de una pagina
+         \ifthenelse{\value{agradecimientodiferencia} < 1}{
+            
+        }{
+            \textcolor{red}{\MakeUppercase{ERROR: El agradecimiento no puede ocupar más de una pagina}}
+        }
+        }
+    \else
+        \thispagestyle{empty}
+        \textcolor{red}{\MakeUppercase{ERROR: El comando agradecimiento no está definido}}\\
+    \fi
+}{
+    
+}
+
+% Se crea nuevo entorno para dedicatoria individuales
+\newenvironment{dedicatoriasimple}[2]{
+    
+
+    \chapter*{\phantom{Dedicatoria \thepage}}
+    \thispagestyle{empty}
+
+    %Se guarda el numero de pagina inicial de cada dedicatoria en un contador
+    \setcounter{dedicatoriasimpleinicio}{\value{page}}
+        
+    {\centering\textbf{DEDICATORIA}\par} % Título en negrita y mayúsculas
+
+        #1 % Texto de la dedicatoria
+        
+    \begin{flushright} %Anilea el texto a la derecha
+        #2\\ % Nombre del integrante del grupo que escribio la dedicatoria
+    \end{flushright}
+
+    %Se guarda el numero de pagina final de cada dedicatoria en un contador
+    \setcounter{dedicatoriasimplefinal}{\value{page}}
+}{
+    % Verifica si la dedicatoria ocupa más de una pagina
+    \setcounter{dedicatoriasimplediferencia}{\value{dedicatoriasimplefinal}}
+    
+    \addtocounter{dedicatoriasimplediferencia}{-\value{dedicatoriasimpleinicio}}
+    \ifthenelse{\value{dedicatoriasimplediferencia} < 1}{
+        %Si la dedicatoria ocupa solo una pagina entonces no hace nada
+    }{
+    % Sin la dedicatoria ocupa más de una pagina entonces se muestra 
+    % advertencia en rojo
+    \textcolor{red}{\MakeUppercase{ERROR: La dedicatoria no puede ocupar más de una pagina}}
+    }
+}
+
+%Se crea entorno principal para mostrar las dedicatorias
+\newenvironment{dedicatoria}{
+     %Valida si el comando "dedicatoriaautorA" esta definida
+    \ifdefined\dedicatoriaautorA
+        %Valida si el comando "dedicatoriaautorA" es true
+        \ifthenelse{\equal{\dedicatoriaautorA}{}}{
+
+        }{
+            \begin{dedicatoriasimple}
+                {\dedicatoriaautorA}
+                {\autorAnombre}
+            \end{dedicatoriasimple}
+        }
+        \else
+            \thispagestyle{empty}
+            \textcolor{red}{\MakeUppercase{ERROR: El comando dedicatoriaautorA no está definido}}
+        \fi
+
+        %Valida si el comando "dedicatoriaautorB" esta definida
+        \ifdefined\dedicatoriaautorB
+            %Valida si el comando "dedicatoriaautorB" es true
+            \ifthenelse{\equal{\dedicatoriaautorB}{}}{
+
+            }{
+                \begin{dedicatoriasimple}
+                {\dedicatoriaautorB}
+                {\autorBnombre}
+                \end{dedicatoriasimple}
+            }
+        \else
+            \thispagestyle{empty}
+            \textcolor{red}{\MakeUppercase{ERROR: El comando dedicatoriaautorB no está definido}}
+        \fi
+
+        %Valida si el comando "dedicatoriaautorC" esta definida
+        \ifdefined\dedicatoriaautorC
+            %Valida si el comando "dedicatoriaautorC" es true
+            \ifthenelse{\equal{\dedicatoriaautorC}{}}{
+   
+            }{
+                \begin{dedicatoriasimple}
+                {\dedicatoriaautorC}
+                {\autorCnombre}
+                \end{dedicatoriasimple}
+            }
+        \else
+            \thispagestyle{empty}
+            \textcolor{red}{\MakeUppercase{ERROR: El comando dedicatoriaautorC no está definido}}
+        \fi
+        
+        %Valida si el comando "dedicatoriaautorC" esta definida
+        \ifdefined\dedicatoriaautorD
+            %Valida si el comando "dedicatoriaautorC" es true
+            \ifthenelse{\equal{\dedicatoriaautorD}{}}{
+                
+            }{
+                \begin{dedicatoriasimple}
+                {\dedicatoriaautorD}
+                {\autorDnombre}
+                \end{dedicatoriasimple}
+            }
+        \else
+            \thispagestyle{empty}
+            \textcolor{red}{\MakeUppercase{ERROR: El comando dedicatoriaautorA no está definido}}
+        \fi
+        
+    }
+{
+
+}
+
+%Se crea un nuevo entorno para el resumen
+\newenvironment{resumenentorno}{
+    %Se valida si el comando "resumen" esta definido
+    \ifdefined\resumen
+        %Se valida si el comando "resumen" esta vacío
+        \ifthenelse{\equal{\resumen}{}}{
+            \textcolor{red}{\MakeUppercase{ERROR: No se ha ingresado el resumen.}} % Muestra un mensaje de error en rojo
+        }{
+            \setcounter{resumeninicio}{\value{page}} %Se agrega el numero de la pagina inicial en el contador
+            
+            {\centering\textbf{RESUMEN}\par}
+            \resumen
+    
+            \setcounter{resumenfinal}{\value{page}} %Se agrega el numero de la pagina final en el contador         
+        }
+    \else
+        \textcolor{red}{\MakeUppercase{ERROR: El comando resumen no está definido}}
+    \fi
+}{
+    %Se establece el valor de la diferencia entre el contador final y el inicial y se guarda en el contador "resumendiferencia"
+     \setcounter{resumendiferencia}{\value{resumenfinal}} 
+     \addtocounter{resumendiferencia}{-\value{resumeninicio}}
+
+    \ifthenelse{\value{resumendiferencia} < 0 \or \value{resumendiferencia} > 2}{
+        %Si el resumen solo ocupa una pagina o más de tres paginas, entonces se muestra un error
+        \textcolor{red}{\MakeUppercase{ERROR: La extensión del resumen debe ser de 2 a 3 paginas.}}
+    }{
+      
+    }
+}
+
+\makeatletter
+% Versión de \tableofcontents sin forzar una sola columna
+\newcommand{\arqtableofcontents}{%
+  \par
+  \vspace*{-\baselineskip}%
+  {\centering \fontsize{11}{16.5}\selectfont ÍNDICE\par}%
+  \vspace{\baselineskip}%
+  \@starttoc{toc}%
+}
+
+
+% Versión de \listoffigures que NO fuerza onecolumn
+\newcommand{\arqlofbody}{%
+  \@starttoc{lof}%
+}
+
+% Versión de \listoftables que NO fuerza onecolumn
+\newcommand{\arqlotbody}{%
+  \@starttoc{lot}%
+}
+\newif\ifarq@switched
+
+\newcommand{\arq@beginonecol}{%
+  \arq@switchedfalse
+  \ifarqformato
+    \if@twocolumn
+      \arq@switchedtrue
+      \clearpage
+      \onecolumn
+    \fi
+  \fi
+}
+
+\newcommand{\arq@endonecol}{%
+  \ifarq@switched
+    \clearpage
+    \twocolumn
+    \setlength{\columnsep}{1cm}%
+  \fi
+}
+\makeatother
+
+
+%Se crea un entorno para el indice
+\newenvironment{indice}{%
+
+    \renewcommand{\contentsname}{%
+        \vspace{-\baselineskip}
+        {\centering \fontsize{11}{16.5}\selectfont ÍNDICE\\ \vspace{\baselineskip}}%
+    }% Se coloca el titulo del índice centrado y en mayúscula
+    
+        
+    \vspace*{-\topskip}
+    \vspace*{-\headsep}
+        % --- Índice: espaciado 0 e interlineado 1.5 ---
+    \setlength{\parskip}{0pt}
+    \setlength{\parindent}{0pt}
+    \setstretch{1.5}
+
+    % Aquí decidimos qué versión usar según la carrera
+    \ifarqformato
+        % Arquitectura: índice en doble columna (no forzamos onecolumn)
+        \arqtableofcontents
+    \else
+        % Otras carreras: comportamiento estándar (una columna)
+        \tableofcontents
+    \fi
+    
+    
+}{%
+}
+\makeatletter
+% Versión Arquitectura: índice de figuras en doble columna
+\newcommand{\arqlistoffigures}{%
+    \paroimpar{\value{page}} % <-- inicio impar
+  \par
+  \vspace*{-\baselineskip}%
+  {\centering \fontsize{11}{16.5}\selectfont ÍNDICE DE FIGURAS\par}%
+  \vspace{\baselineskip}%
+  \setlength{\parskip}{0pt}\setlength{\parindent}{0pt}%
+  \@starttoc{lof}%
+}
+
+\newcommand{\arqlistoftables}{%
+    \paroimpar{\value{page}} % <-- inicio impar
+  \par
+  \vspace*{-\baselineskip}%
+  {\centering \fontsize{11}{16.5}\selectfont ÍNDICE DE TABLAS\par}%
+  \vspace{\baselineskip}%
+  \setlength{\parskip}{0pt}\setlength{\parindent}{0pt}%
+  \@starttoc{lot}%
+}
+
+\makeatother
+
+
+%Entorno que sirve para los indices de tablas y figuras
+\newenvironment{indices}[2]{
+    \cleardoublepage % <-- FORZAR inicio en página impar
+
+    %Se valida si el indice que se quiere mostrar es el de tablas o el de figuras
+    \ifthenelse{\equal{#1}{ÍNDICE DE TABLAS}}{
+        %Se modifica el titulo del indice para mostrar indice de tablas
+        \renewcommand{\listtablename}{
+        \vspace{-\baselineskip}
+        {\centering \fontsize{11}{16.5}\selectfont #1\\ \vspace{\baselineskip}}
+        } %Se coloca el indice del título centrado y en mayuscula
+        
+        \vspace*{-\topskip}
+        \vspace*{-\headsep}
+
+        \setlength{\parskip}{0pt}
+        \setlength{\parindent}{0pt}
+        \fontsize{11}{16.5}\selectfont
+
+        #2 %Se muestra el indice
+        
+    }{
+        %Se modifica el titulo del indice para mostrar indice de figuras
+        \renewcommand{\listfigurename}{
+        \vspace{-\baselineskip}
+        {\centering \fontsize{11}{16.5}\selectfont #1\\ \vspace{\baselineskip}}
+        } %Se coloca el indice del título centrado y en mayuscula
+
+        \vspace*{-\topskip}
+        \vspace*{-\headsep}
+        \setlength{\parskip}{0pt}
+        \setlength{\parindent}{0pt}
+        \fontsize{11}{16.5}\selectfont
+
+        #2 %Se muestra el indice
+    }
+}{
+}
+
+%Se crea un entorno que sirve para las siglas, abreviaturas y nomenclaturas
+\newenvironment{sigabrnom}[1]{
+    %Se valida si se quiere mostrar las siglas, las abreviaturas o la nomenclatura
+    \ifthenelse{\equal{#1}{siglas}}{
+        %Se valida si alguna sigla ya fue ingresada
+        \ifthenelse{\equal{\ningunasiglaingresada}{false}}{
+            \chapter*{\phantom{Siglas}}\addcontentsline{toc}{chapter}{SIGLAS}
+            \printnoidxglossary[type=siglas, style=super]
+        }{
+        }
+    }{}
+    %Se valida si se quiere mostrar las siglas, las abreviaturas o la nomenclatura
+    \ifthenelse{\equal{#1}{abreviaturas}}{
+        %Se valida si alguna abreviatura ya fue ingresada
+        \ifthenelse{\equal{\ningunaabreviaturaingresada}{false}}{
+            \chapter*{\phantom{Abreviaturas}}\addcontentsline{toc}{chapter}{ABREVIATURAS}
+            \printnoidxglossary[type=abreviaturas, style=super]
+        }{
+        }  
+    }{}
+    %Se valida si se quiere mostrar las siglas, las abreviaturas o la nomenclatura
+    \ifthenelse{\equal{#1}{nomenclatura}}{
+        %Se valida si alguna nomenclatura ya fue ingresada
+        \ifthenelse{\equal{\ningunanomenclaturaingresada}{false}}{
+            \chapter*{\phantom{Nomenclatura}}\addcontentsline{toc}{chapter}{NOMENCLATURA}
+            \printnoidxglossary[type=nomenclatura, style=super]
+        }{
+        }
+    }{}
+    
+}{
+    
+}
+
+%Se crea entorno que contendra todos los capitulos
+\newenvironment{capitulosentorno}{
+    \capitulo{Introducción}{
+        \section{Planteamiento del problema}
+        \ifdefined\planteamientodelproblema
+            \begin{planteamientodelproblema}
+            \end{planteamientodelproblema}
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: el comando planteamientodelproblema no está definido}}
+        \fi
+        \section{Antecedentes}
+        \ifdefined\antecedentes
+            \begin{antecedentes}
+            \end{antecedentes}
+        \else
+            \textcolor{red}{\MakeUppercase{ERROR: el comando antecedentes no está definido}}
+        \fi
+        \section{Alcances y limitaciones}
+        \subsection{Alcances}
+            \ifdefined\alcances
+                \begin{alcances}
+                \end{alcances}
+            \else
+                \textcolor{red}{\MakeUppercase{ERROR: el comando alcances no está definido}}
+            \fi
+        \subsection{Limitaciones}
+            \ifdefined\limitaciones
+                \begin{limitaciones}
+                \end{limitaciones}
+            \else
+                \textcolor{red}{\MakeUppercase{ERROR: el comando limitaciones no está definido}}
+            \fi
+        \section{Objetivos}
+        \subsection{Objetivo general}
+            \ifdefined\objetivogeneral
+                \begin{objetivogeneral}
+                \end{objetivogeneral}
+            \else
+                \textcolor{red}{\MakeUppercase{ERROR: el comando objetivogeneral no está definido}}
+            \fi
+        \subsection{Objetivos específicos}
+            \ifdefined\objetivosespecificos
+                \begin{objetivosespecificos}
+                \end{objetivosespecificos}
+            \else
+                \textcolor{red}{\MakeUppercase{ERROR: el comando objetivosespecificos no está definido}}
+            \fi
+    }
+    
+    %Se valida que el comando capitulos esté definido
+    \ifdefined\capitulos
+        %Se muestan los capitulos
+        \capitulos
+        
+    \else
+        \textcolor{red}{\MakeUppercase{ERROR: El comando capítulos no está definido}}
+    \fi
+
+    %El capitulo de Conclusiones y Recomencaciones ya esta creado
+        \capitulo{Conclusiones y Recomendaciones}{
+            \section{Conclusiones}
+                %Se valida que el comando conclusiones esté definido
+                \ifdefined\conclusiones
+
+                    \begin{conclusiones}
+                    \end{conclusiones}
+                    
+                \else
+                    \textcolor{red}{\MakeUppercase{ERROR: el entorno conclusiones no está definido}}
+                \fi
+            \section{Recomendaciones}
+                %Se valida que el comando recomendaciones esté definido
+                \ifdefined\recomendaciones
+                
+                    \begin{recomendaciones}
+                    \end{recomendaciones}
+                    
+                \else
+                    \textcolor{red}{\MakeUppercase{ERROR: el entorno recomendaciones no está definido}}
+                \fi
+        }
+}{
+    %La seccion de capitulos tiene validacion para que no ocupe mas de 150 paginas, si ocupa mas se muestra un error.  
+    \ifthenelse{\value{page} > 150}{
+        \textcolor{red}{\MakeUppercase{ERROR: La extensión de los capítulos no debe ser mayor a 150 paginas}}
+    }{}
+}
+
+%Se crea entorno para cada capitulo
+\newenvironment{capituloentorno}[2]{
+    \setlength{\parskip}{\baselineskip} %Se pone una linea vacia entre parrafos
+    
+    \chapter*{\phantom{CAPÍTULO\,\thenumerocapitulo.\, \MakeUppercase{#1}}}\addcontentsline{toc}{chapter}{CAPÍTULO
+    \,\thenumerocapitulo.\MakeUppercase{#1}}
+    
+    \stepcounter{chapter} %Aumenta en 1 el contador
+    
+    % título del capitulo
+    {\centering\textbf{CAPÍTULO
+    \,\thenumerocapitulo.\,\MakeUppercase{#1}}\\[\baselineskip]}
+    #2  
+}{
+    \stepcounter{numerocapitulo} % Se aumenta en 1 el contador con el numero del capitulo%
+}
+
+%Se crea un entorno para el glosario
+\newenvironment{glosario}{
+    %Se dvalida que el comando mostrarglosario esté definido
+    \ifdefined\mostrarglosario
+        %Se valida que el comando mostrarglosario sea una de las dos opciones validad "true" o "false
+        \ifthenelse{\equal{\mostrarglosario}{true} \or \equal{\mostrarglosario}{false}}{
+
+            %Si el comando mostrarglosario es true entonces se muestra el glosario
+            \ifthenelse{\equal{\mostrarglosario}{true}}{
+                %Se verifica que el glosario tenga alguna entrada del glosario añadida y si no tiene se muestra un error
+                \ifthenelse{\equal{\glosariovacio}{true}}{
+                    
+                    \textcolor{red}{\MakeUppercase{ERROR: no se ha ingresado ningúna palabra del gloasrio}}
+                }{
+                    \chapter*{\phantom{Glosario}}\addcontentsline{toc}{chapter}{GLOSARIO}
+                    
+                    \printnoidxglossary[type=glosario, style=super]
+                }
+            }{
+                %Si el comando mostrarglosario es false entonces no se muestra nada
+            }
+        }{
+            \textcolor{red}{\MakeUppercase{ERROR: el valor de "mostrarglosario" solo puede ser true o false}}
+        }
+    \else
+        \textcolor{red}{\MakeUppercase{ERROR: el comando mostrarglosario no está definido}}
+    \fi
+}{
+
+}
+
+%Se crea entorno para las referencias
+\newenvironment{referencias}{
+    {\centering\textbf{REFERENCIAS}\\}
+    
+    \printbibliography[heading=none]
+    
+}{
+}
+
+%Se crea entorno que contiene todos los anexos
+\newenvironment{anexosentorno}{
+    \paroimpar{\value{page}}
+    \addtocontents{toc}{\vspace{\baselineskip}}
+    \addtocontents{toc}{\textbf{\MakeUppercase{anexos}}\\}
+    %Se valida que el comando anexos este definido
+    \ifdefined\anexos
+        %Si todo esta bien se muestran los anexos
+        \anexos
+    \else
+        %Si no esta definido se muestra un error
+        \textcolor{red}{\MakeUppercase{ERROR: El comando anexos no está definido}}
+    \fi
+}{
+}
+
+%Se crea un entorno para la creacion de listas enumeradas que ocupa el tamaño de fuente apropiado
+\newenvironment{listaenumerada}{
+    \begin{enumerate}
+    \fontsize{11}{16.5}\selectfont
+}{
+    \end{enumerate}
+}
+
+%Se crea un entorno par ala creacion de listas que ocupa el tamaño de fuente apropiado
+\newenvironment{lista}{
+    \begin{itemize}
+    \fontsize{11}{16.5}\selectfont
+}{
+    \end{itemize}
+}
