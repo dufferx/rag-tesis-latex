@@ -36,7 +36,7 @@
 % =============== NO MODIFICAR LOS COMANDOS ======================
 % ================================================================
 
-\newcommand{\titulo}{} %Título del trabajo
+\newcommand{\titulo}{Sistema de Generación Aumentada por Recuperación (RAG) para Diagnóstico y Mantenimiento de Aires Acondicionados tipo Split} %Título del trabajo
 
 % Carrera - [comando correspondiente]:
 % 1. Ingeniería Informática - informatica
@@ -50,13 +50,13 @@
 % 9. Arquitectura - arquitectura
 % 10. Licenciatura en Diseño - diseño
 
-\newcommand{\carreraUno}{}
+\newcommand{\carreraUno}{informatica}
 %\newcommand{\carreraDos}{energetica}
 %\newcommand{\carreraTres}{industrial}
 
-\autor{Autor 1}{M}{carreraUno} % Autor 1
-\autor{}{}{} % Autor 2 (opcional)
-\autor{}{}{} % Autor 3 (opcional)
+\autor{Rodrigo Andrés Mena Caballero}{M}{carreraUno} % Autor 1
+\autor{Duglas Fernando Pineda Fuentes}{M}{carreraUno} % Autor 2 (opcional)
+\autor{Mario Antonio Martinez Villatoro}{M}{carreraUno} % Autor 3 (opcional)
 \autor{}{}{} % Autor 4 (opcional)
 
 \newcommand{\mesdegraduacion}{Mayo 2026} % Mes y año de graduación
@@ -73,8 +73,8 @@
 \newcommand{\sexoSecretario}{femenino} % Sexo del secretario o secretaria general
 \newcommand{\decano}{Carlos Ernesto Rivas Cerna} % Nombre del decano de la facultad de ingeniería y arquitectura
 \newcommand{\sexoDecano}{masculino} % Sexo del secretario o secretaria general
-\newcommand{\directorDeCarrera}{ingresar nombre del director de carrera} % Director de la carrera
-\newcommand{\carreraDirectorDeCarrera}{ingresar la carrera} % Carrera del director de carrera
+\newcommand{\directorDeCarrera}{José Enmanuel Amaya Araújo} % Director de la carrera
+\newcommand{\carreraDirectorDeCarrera}{informatica} % Carrera del director de carrera
 \newcommand{\sexoDirectorDeCarrera}{masculino} % Sexo del director de carrera
 % Segundo director de carrera (opcional, para segunda carrera)
 \newcommand{\directorDeCarreraDos}{} % Nombre del segundo director de carrera (dejar vacío si no aplica)
@@ -160,48 +160,47 @@ Vestibulum vel nisi turpis. Donec pellentesque odio sodales, facilisis elit ac, 
 % ===============================================================
 
 \newenvironment{planteamientodelproblema}{}{
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+    En los entornos de soporte técnico y mantenimiento de sistemas de aire acondicionado tipo Split, gran parte del conocimiento especializado necesario para resolver fallas precisas se encuentra distribuido de manera dispersa en extensos manuales de servicio, reportes de fallas, bitácoras y diversa documentación técnica. El acceso manual a esta información para diagnosticar componentes como tarjetas electrónicas, sensores o sistemas de control es un proceso que suele ser lento, inconsistente y dependiente de la experiencia individual de cada técnico.
 
-    In malesuada aliquet orci ac rutrum. Donec dignissim lectus eu ante venenatis semper. Aliquam leo ligula, vehicula ac sagittis non, consectetur nec dui. Pellentesque at arcu diam. Aliquam dignissim condimentum auctor. Nulla vehicula et quam vitae scelerisque. Phasellus bibendum posuere egestas. Donec vel nunc massa. Etiam posuere est urna, eu bibendum mauris semper ut. Suspendisse rutrum purus in metus tristique, nec sagittis arcu posuere. Vestibulum tempus pellentesque est sit amet eleifend. Phasellus fringilla neque nec est mattis, sed varius nisi tristique. Pellentesque ullamcorper massa ut orci rutrum pretium.
-    
-    Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
-    
-    Morbi blandit molestie lectus non tincidunt. Nam id imperdiet nisi. Proin sed risus vehicula, malesuada tellus nec, dapibus magna. Cras vitae dolor lorem. Morbi vel arcu sit amet dolor auctor facilisis ac nec arcu. Pellentesque congue vulputate ligula, ac tempus metus porttitor sit amet. Aliquam egestas ultricies cursus. Mauris sit amet blandit elit. Cras ac nunc et enim aliquam efficitur. Suspendisse potenti. Integer accumsan turpis ut posuere hendrerit.
-    
-    Vestibulum vel nisi turpis. Donec pellentesque odio sodales, facilisis elit ac, finibus libero. Maecenas in turpis eget sapien volutpat finibus sed a turpis. In a aliquet magna. Nullam et molestie tellus. In bibendum nunc tortor, eget malesuada turpis tincidunt vitae. Praesent non nulla semper ligula euismod facilisis ac at mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam non faucibus dolor. In hac habitasse platea dictumst. Sed accumsan rutrum fringilla. In ac magna nunc. Praesent ac convallis magna.
-    
+    De acuerdo con las entrevistas realizadas a profesionales del sector, la búsqueda manual de datos técnicos, diagramas o códigos de error toma en promedio entre uno y más de cinco minutos por consulta. Esta falta de información inmediata retrasa significativamente el tiempo de atención de cada servicio y, en consecuencia, impacta de forma directa y negativa en la productividad, reduciendo la cantidad de mantenimientos o reparaciones que los profesionales pueden concretar durante su jornada diaria.
+
+    Ante esta dificultad, los técnicos recurren a fuentes no estructuradas como foros en línea y herramientas de Inteligencia Artificial (IA) genéricas para agilizar sus diagnósticos. Sin embargo, estas alternativas presentan una limitante crítica: las respuestas suelen ser demasiado generales y carecen del contexto técnico específico de cada fabricante. Además, la IA tradicional frecuentemente redunda en la información que entrega, manteniéndose en un círculo de explicaciones superficiales sin profundizar en la solución real requerida para el equipo. Existe, por tanto, un vacío tecnológico claro entre la necesidad de inmediatez del técnico y la exactitud que exigen los manuales de servicio oficiales.
 }
 
 \newenvironment{antecedentes}{
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+Las entrevistas realizadas a cuatro profesionales con perfiles variados y entre seis meses y ocho años de experiencia ---con formación tanto técnica formal como empírica--- validaron la magnitud del problema descrito. La totalidad de los entrevistados ha recurrido a herramientas de inteligencia artificial para apoyar sus diagnósticos, calificándolas entre siete y diez sobre diez en confiabilidad. No obstante, a pesar de esta valoración positiva, coinciden en señalar sus limitaciones de forma contundente: un técnico con tres años y medio de experiencia que paga una suscripción a una herramienta de IA y le carga manuales directamente reportó que la herramienta ``se mantiene en el mismo círculo sin profundizar más'', mientras que otro profesional con tres años de trayectoria advirtió que actuar con información descontextualizada respecto al fabricante genera diagnósticos erróneos, evidenciando un riesgo operativo real.
 
-In malesuada aliquet orci ac rutrum. Donec dignissim lectus eu ante venenatis semper. Aliquam leo ligula, vehicula ac sagittis non, consectetur nec dui. Pellentesque at arcu diam. Aliquam dignissim condimentum auctor. Nulla vehicula et quam vitae scelerisque. Phasellus bibendum posuere egestas. Donec vel nunc massa. Etiam posuere est urna, eu bibendum mauris semper ut. Suspendisse rutrum purus in metus tristique, nec sagittis arcu posuere. Vestibulum tempus pellentesque est sit amet eleifend. Phasellus fringilla neque nec est mattis, sed varius nisi tristique. Pellentesque ullamcorper massa ut orci rutrum pretium.
+Este déficit también se refleja en la productividad: el técnico con mayor carga de trabajo atiende entre siete y ocho equipos diarios y señaló que los retrasos por búsqueda de información afectan considerablemente los servicios siguientes, en tanto que otro entrevistado indicó que, en casos de alta complejidad, la ausencia de datos técnicos a la mano puede reducir la atención a un único equipo en toda la jornada.
 
-Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+Ante este escenario, los cuatro profesionales manifestaron de forma unánime su interés en un asistente especializado que muestre el fragmento exacto del documento, proporcione pasos numerados e incluya diagramas técnicos; características que, según los entrevistados, eliminarían la ambigüedad de las respuestas genéricas y reducirían el margen de error en diagnósticos que exigen valores precisos de voltaje, resistencia o configuración de sensores. Esta necesidad operativa no resuelta constituye el antecedente directo que motiva el presente proyecto.
 }{}
 
 \newenvironment{alcances}{}{
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget arcu id justo mollis sagittis. Integer commodo vitae libero eget sagittis. Etiam id ante dignissim, sollicitudin odio id, rhoncus magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent at tortor eros. Aenean in euismod mauris. Suspendisse pharetra aliquet ex, sed tempus augue aliquam nec. Donec tempor molestie mi, quis faucibus sem. Cras ornare bibendum nulla a laoreet. Vestibulum risus massa, feugiat at eros ut, rhoncus aliquam turpis.
+Para dar respuesta a la necesidad operativa de agilizar los diagnósticos técnicos, el proyecto se centra en el diseño y desarrollo de un prototipo funcional basado en la arquitectura de Generación Aumentada por Recuperación (RAG). El ámbito de aplicación abarca exclusivamente los sistemas de aire acondicionado tipo Split de muro o pared, instalados en entornos residenciales y comerciales ligeros. Específicamente, el asistente brindará soporte para equipos con tecnología Inverter y convencional que operen dentro de un rango de capacidad térmica de 9,000 a 24,000 BTU.
 
-In malesuada aliquet orci ac rutrum. Donec dignissim lectus eu ante venenatis semper. Aliquam leo ligula, vehicula ac sagittis non, consectetur nec dui. Pellentesque at arcu diam. Aliquam dignissim condimentum auctor. Nulla vehicula et quam vitae scelerisque. Phasellus bibendum posuere egestas. Donec vel nunc massa. Etiam posuere est urna, eu bibendum mauris semper ut. Suspendisse rutrum purus in metus tristique, nec sagittis arcu posuere. Vestibulum tempus pellentesque est sit amet eleifend. Phasellus fringilla neque nec est mattis, sed varius nisi tristique. Pellentesque ullamcorper massa ut orci rutrum pretium.
+A nivel de hardware, el marco de diagnóstico de la herramienta contempla el análisis de los componentes principales que estructuran estos equipos: la unidad interior, la unidad exterior, los sistemas de control, los sensores de temperatura y el sistema de drenaje. Para asegurar la viabilidad del desarrollo dentro de los plazos establecidos, el dominio operativo se acota a la resolución de exactamente quince fallas comunes y repetibles asociadas a dichos componentes, cuyo listado exhaustivo y categorización se documentan en el Anexo A.
 
-Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+El motor de conocimiento del sistema se alimenta mediante un corpus técnico compuesto en su totalidad por manuales de servicio oficiales. Como resultado final, se construye un prototipo de software funcional, accesible a través de una interfaz de usuario, capaz de procesar consultas formuladas en lenguaje natural. Este aplicativo genera hipótesis de causa, secuencias de pasos para el diagnóstico y recomendaciones de mantenimiento básico, garantizando en todo momento la referenciación exacta del fragmento documental de origen que fundamenta la respuesta.
 }
 \newenvironment{limitaciones}{}{
     \begin{itemize}
-        \item
-        Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+        \item \textbf{No entrenamiento de modelos fundacionales:} El sistema no entrenará Modelos de Lenguaje de Gran Escala (LLM) desde cero; la solución integrará modelos preentrenados mediante el uso de frameworks existentes.
+        \item \textbf{Ausencia de autonomía de diagnóstico:} El sistema no actuará como una entidad de diagnóstico autónoma; operará estrictamente como un asistente de apoyo para acelerar la búsqueda de información, mientras que la toma de decisiones finales recaerá siempre en el criterio del técnico humano.
+        \item \textbf{Respaldo documental obligatorio:} El prototipo no generará recomendaciones empíricas ni respuestas que carezcan de un respaldo documental explícito dentro de la base de datos vectorial.
     \end{itemize}
 }
 \newenvironment{objetivogeneral}{}{
-    Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum facilisis ac lectus eu volutpat. Maecenas ac ante erat. Nunc sit amet velit dapibus, tincidunt risus quis, sagittis est. Aliquam dapibus commodo enim, ut tempor sem accumsan nec. Sed non scelerisque velit. Ut accumsan ullamcorper dui at lacinia.
+    Implementar un prototipo funcional del asistente que permita la interacción directa con el técnico.
 }
 \newenvironment{objetivosespecificos}{}{
     \begin{itemize}
-        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        \item Definir el catálogo de fallas con el que se construirá el sistema RAG.
+        \item Diseñar el proceso de diagnóstico de fallas, incluyendo los prompts iniciales y el flujo de conversación esperado.
+        \item Analizar el proceso de diagnóstico de fallas en aires acondicionados tipo Split para alinear las respuestas del sistema con el flujo de trabajo real de los técnicos.
+        \item Construir un repositorio documental curado a partir de manuales técnicos de servicio, reportes de fallas y registros históricos de los fabricantes.
+        \item Integrar un modelo de lenguaje que genere recomendaciones basadas exclusivamente en la información recuperada de las fuentes documentales oficiales.
+        \item Evaluar el sistema en términos de utilidad, precisión percibida y reducción del esfuerzo y tiempo de búsqueda manual frente a los métodos tradicionales.
+        \item Diseñar el instrumento de evaluación para la encuesta a los usuarios finales.
     \end{itemize}
 }
 
@@ -214,6 +213,26 @@ Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum fac
 
 \newcommand{\capitulos}{
 
+\capitulo{Estructura del Trabajo}{
+
+El presente documento se organiza en seis capítulos que siguen una progresión lógica desde la identificación del problema hasta las conclusiones derivadas del desarrollo del prototipo. A continuación se describe brevemente el contenido de cada uno de ellos.
+
+El Capítulo 1, Introducción, expone el planteamiento del problema que motiva el proyecto, describiendo las dificultades que enfrentan los técnicos de mantenimiento al acceder a información especializada de manera oportuna. Se presentan también los antecedentes obtenidos a partir de entrevistas con profesionales del sector, el alcance y las limitaciones operativas del sistema, así como el objetivo general y los objetivos específicos que guían el desarrollo.
+
+El Capítulo 2, Estructura del Trabajo, corresponde al presente capítulo y tiene como propósito orientar al lector sobre la organización del documento, describiendo de forma sintética el contenido de cada sección y la relación entre ellas.
+
+El Capítulo 3, Marco Teórico, fundamenta conceptualmente el proyecto. Se abordan los principios del Procesamiento de Lenguaje Natural (PLN), los Modelos de Lenguaje de Gran Escala (LLM) y su arquitectura Transformer, el problema de la alucinación en sistemas generativos, la representación semántica mediante embeddings, las bases de datos vectoriales y la búsqueda por similitud, la arquitectura de Generación Aumentada por Recuperación (RAG) y el framework LlamaIndex utilizado como capa de integración. Este capítulo incluye una figura explicativa del flujo completo del sistema RAG.
+
+El Capítulo 4, Metodología, describe el proceso de desarrollo del prototipo estructurado bajo la metodología CRISP-DM. Se documenta cada una de sus seis fases: comprensión del problema, comprensión de los datos, preparación de los datos, modelado, evaluación e implementación. Se detallan las decisiones técnicas tomadas en el benchmarking, incluyendo la selección del modelo de embeddings Gemini Embedding 001, el modelo generativo Gemini 1.5 Pro y la base de datos vectorial ChromaDB, así como las estrategias de ingesta y particionado de los manuales de servicio.
+
+El Capítulo 5, Presentación, Análisis e Interpretación de Resultados, expone los hallazgos obtenidos durante la fase de evaluación del prototipo. Se presenta la tabla resumen de pruebas técnicas, las lecciones aprendidas derivadas de errores y hallazgos durante el desarrollo, y los resultados de la evaluación de la herramienta por parte de los técnicos usuarios.
+
+El Capítulo 6, Conclusiones y Recomendaciones, sintetiza los principales logros del proyecto en relación con los objetivos planteados y propone líneas de trabajo futuro sustentadas en bibliografía científica, tales como el uso de bases de datos vectoriales avanzadas, técnicas de expansión de consultas y representación mediante grafos de conocimiento.
+
+Finalmente, el documento incluye dos anexos: el Anexo A contiene el catálogo exhaustivo de las quince fallas documentadas que conforman el dominio del sistema, y el Anexo B presenta el instrumento de evaluación y las transcripciones de las entrevistas realizadas a los técnicos durante la fase de comprensión del problema.
+
+}
+
 \capitulo{Marco Teórico}{
 
 }
@@ -222,9 +241,8 @@ Nullam tempor elit id lectus maximus, eu congue mauris consequat. Vestibulum fac
 
 }
 
+\capitulo{Presentación, Análisis e Interpretación de Resultados}{
 
-\capitulo{Análisis de resultados}{
-    
 }
 }
 
