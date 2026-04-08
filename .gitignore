@@ -1,0 +1,30 @@
+# ── Artefactos de compilación LaTeX ──────────────────────────────
+*.aux
+*.bcf
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.blg
+*.bbl
+*.nav
+*.snm
+*.vrb
+
+# ── Configuración local de editor ────────────────────────────────
+.vscode/
+
+# ── Documentos de trabajo externos (Word, etc.) ──────────────────
+*.docx
+*.doc
+
+# ── Archivos temporales y de trabajo ─────────────────────────────
+*.tmp
+*~
+.DS_Store
