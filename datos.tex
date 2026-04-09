@@ -235,6 +235,72 @@ Finalmente, el documento incluye dos anexos: el Anexo A contiene el catálogo ex
 
 \capitulo{Marco Teórico}{
 
+Este capítulo presenta los fundamentos teóricos y las tecnologías subyacentes que sustentan el diseño e implementación del asistente inteligente. Se abordan los conceptos de Procesamiento de Lenguaje Natural, los Modelos de Lenguaje de Gran Escala y su arquitectura Transformer, el problema de la alucinación, la representación semántica mediante embeddings, las bases de datos vectoriales, la arquitectura de Generación Aumentada por Recuperación (RAG) y el framework LlamaIndex utilizado como capa de integración.
+
+\section{Procesamiento de Lenguaje Natural (PLN)}
+
+El Procesamiento de Lenguaje Natural (PLN) es una subdisciplina de la Inteligencia Artificial que estudia la interacción entre las computadoras y el lenguaje humano. Su objetivo principal es permitir que los sistemas computacionales comprendan, interpreten y generen lenguaje natural de forma significativa. El PLN combina técnicas de lingüística computacional, aprendizaje automático, modelado estadístico y redes neuronales profundas \parencite{jurafsky2023speech}.
+
+En el contexto de sistemas técnicos, el PLN permite analizar documentación especializada (manuales de servicio, reportes técnicos, bitácoras) y convertir texto no estructurado en información procesable por un sistema inteligente.
+
+Para el presente proyecto, el PLN es la base que permite interpretar preguntas formuladas por técnicos en lenguaje natural, comprender términos técnicos como códigos de error, voltajes, resistencias o configuraciones de sensores, y relacionar dichas consultas con fragmentos específicos de manuales oficiales.
+
+\section{Modelos de Lenguaje de Gran Escala (LLM) y Arquitectura Transformer}
+
+Los Modelos de Lenguaje de Gran Escala (Large Language Models, LLM) son modelos de aprendizaje profundo entrenados con grandes volúmenes de texto para predecir y generar lenguaje coherente \parencite{brown2020language}.
+
+La mayoría de los LLM modernos están basados en la arquitectura Transformer, introducida por \textcite{vaswani2017attention} en el artículo ``Attention Is All You Need''. Esta arquitectura utiliza un mecanismo llamado autoatención (self-attention) que permite al modelo evaluar la relevancia de cada palabra respecto a las demás dentro de una secuencia.
+
+Entre las características principales de los Transformers se encuentran el procesamiento paralelo de secuencias, la captura eficiente de dependencias de largo alcance y una mejor comprensión contextual que los modelos recurrentes tradicionales.
+
+Sin embargo, los LLM presentan limitaciones importantes: pueden generar información incorrecta (alucinaciones), no garantizan precisión técnica en dominios especializados y no tienen acceso dinámico a documentación específica salvo que se integre un sistema de recuperación externa.
+
+En el contexto del diagnóstico de equipos tipo Split, depender únicamente de un LLM generalista puede producir respuestas ambiguas o no alineadas con especificaciones del fabricante.
+
+\subsection{Limitaciones de los LLM Tradicionales y Problema de Alucinación}
+
+Uno de los principales problemas documentados en los LLM es la alucinación, fenómeno en el que el modelo genera información plausible pero incorrecta o no respaldada por una fuente verificable \parencite{ji2023survey}.
+
+En entornos técnicos críticos, como el diagnóstico eléctrico o electrónico, este comportamiento representa un riesgo operativo real, ya que decisiones incorrectas pueden provocar daños en componentes, generar diagnósticos erróneos, incrementar tiempos de reparación y afectar la seguridad del técnico.
+
+Diversos estudios recientes \parencite{ji2023survey, lewis2020retrieval} han señalado que los LLM sin acceso a fuentes externas estructuradas tienden a completar respuestas con conocimiento estadístico aprendido durante el entrenamiento, lo cual no garantiza exactitud técnica específica por fabricante.
+
+Por ello, surge la necesidad de integrar mecanismos de recuperación de información controlada.
+
+\section{Embeddings y Representación Semántica}
+
+Los embeddings son representaciones vectoriales de palabras, frases o documentos en un espacio matemático de múltiples dimensiones. Su propósito es capturar relaciones semánticas entre conceptos \parencite{mikolov2013efficient}.
+
+En lugar de representar texto como simples palabras clave, los embeddings permiten que términos conceptualmente similares se ubiquen cerca en el espacio vectorial. Por ejemplo, términos como ``Sensor NTC'', ``Termistor'' y ``Sensor de temperatura evaporador'', aunque no sean idénticos, pueden tener proximidad semántica en el espacio vectorial, permitiendo búsquedas más inteligentes.
+
+Esta representación es clave para la búsqueda semántica, que supera la búsqueda tradicional basada en coincidencia exacta de palabras.
+
+\section{Bases de Datos Vectoriales y Búsqueda Semántica}
+
+Las bases de datos tradicionales (relacionales o NoSQL) están diseñadas para búsquedas estructuradas basadas en campos específicos o coincidencias exactas.
+
+En contraste, las bases de datos vectoriales almacenan embeddings y permiten búsquedas por similitud utilizando métricas como la similitud coseno, la distancia euclidiana y el producto punto. Esto permite encontrar fragmentos de documentos que sean semánticamente relevantes aunque no compartan exactamente las mismas palabras.
+
+En el caso de manuales técnicos extensos, una base vectorial permite dividir documentos en fragmentos, convertirlos en embeddings y recuperar únicamente los fragmentos más relevantes según la consulta del técnico. Esta tecnología es esencial para implementar sistemas de recuperación eficiente sobre documentación especializada.
+
+\section{Generación Aumentada por Recuperación (RAG)}
+
+La Generación Aumentada por Recuperación (Retrieval-Augmented Generation, RAG) es una arquitectura que combina un sistema de recuperación de información (base de datos vectorial) con un modelo generativo (LLM) \parencite{lewis2020retrieval}.
+
+En lugar de depender únicamente del conocimiento interno del modelo, RAG permite que el LLM recupere primero fragmentos relevantes de documentos oficiales y genere una respuesta basada exclusivamente en ese contexto recuperado. Esto reduce significativamente el problema de alucinación y aumenta la precisión técnica.
+
+En el proyecto propuesto, el flujo es el siguiente: el técnico formula una consulta, el sistema genera el embedding de la consulta, se buscan fragmentos relevantes en la base vectorial, el LLM genera una respuesta utilizando únicamente esos fragmentos y, finalmente, se muestra el fragmento exacto del manual como respaldo.
+
+Este enfoque permite cumplir con el requisito identificado en las entrevistas: mostrar información específica del fabricante y pasos numerados directamente desde el manual.
+
+\section{Framework LlamaIndex}
+
+LlamaIndex es un framework diseñado para facilitar la integración entre fuentes de datos externas y modelos LLM \parencite{llamaindex2024}. Su función principal es ingestar documentos, fragmentarlos, generar embeddings, indexarlos y conectarlos con modelos generativos.
+
+De este modo, LlamaIndex permite construir aplicaciones basadas en arquitectura RAG de manera estructurada, facilitando la indexación de manuales técnicos, el control sobre las fuentes utilizadas y la generación de respuestas respaldadas por contexto verificable.
+
+En este proyecto, LlamaIndex actúa como la capa intermedia que conecta los manuales de servicio con el modelo generativo y la base vectorial.
+
 }
 
 \capitulo{Metodología}{
