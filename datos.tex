@@ -291,7 +291,9 @@ En lugar de depender únicamente del conocimiento interno del modelo, RAG permit
 
 En el proyecto propuesto, el flujo es el siguiente: el técnico formula una consulta, el sistema genera el embedding de la consulta, se buscan fragmentos relevantes en la base vectorial, el LLM genera una respuesta utilizando únicamente esos fragmentos y, finalmente, se muestra el fragmento exacto del manual como respaldo.
 
-Este enfoque permite cumplir con el requisito identificado en las entrevistas: mostrar información específica del fabricante y pasos numerados directamente desde el manual.
+Este enfoque permite cumplir con el requisito identificado en las entrevistas: mostrar información específica del fabricante y pasos numerados directamente desde el manual. Como se ilustra en la \reffig{diagrama1.png}, el flujo del sistema se divide en una etapa de recuperación semántica y una etapa de generación fundamentada, ambas orquestadas por el framework LlamaIndex como capa de integración.
+
+\imagen{diagrama1.png}{Arquitectura del Sistema de Generación Aumentada por Recuperación (RAG)}{false}{Elaboración propia}{0.35}{V}
 
 \section{Framework LlamaIndex}
 
