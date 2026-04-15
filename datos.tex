@@ -59,7 +59,7 @@
 \autor{Mario Antonio Martinez Villatoro}{M}{carreraUno} % Autor 3 (opcional)
 \autor{}{}{} % Autor 4 (opcional)
 
-\newcommand{\mesdegraduacion}{Mayo 2026} % Mes y año de graduación
+\newcommand{\mesdegraduacion}{Abril 2026} % Mes y año de graduación
 
 %================================================================
 %            Sección editable para segunda portada
@@ -133,7 +133,15 @@ Vestibulum vel nisi turpis. Donec pellentesque odio sodales, facilisis elit ac, 
 % ================== NO MODIFICAR LOS COMANDOS ===================
 % ================================================================
 
+\itemsiglas{BTU}{Unidad Térmica Británica (\textit{British Thermal Unit})}
+\itemsiglas{CRISP-DM}{\textit{Cross-Industry Standard Process for Data Mining}}
 \itemsiglas{FIA}{Facultad de Ingeniería y Arquitectura}
+\itemsiglas{IA}{Inteligencia Artificial}
+\itemsiglas{LLM}{Modelos de Lenguaje de Gran Escala (\textit{Large Language Models})}
+\itemsiglas{NTC}{Coeficiente de Temperatura Negativo (\textit{Negative Temperature Coefficient})}
+\itemsiglas{OCR}{Reconocimiento Óptico de Caracteres (\textit{Optical Character Recognition})}
+\itemsiglas{PLN}{Procesamiento de Lenguaje Natural}
+\itemsiglas{RAG}{Generación Aumentada por Recuperación (\textit{Retrieval-Augmented Generation})}
 \itemsiglas{UCA}{Universidad Centroamericana José Simeón Cañas}
 
 
@@ -178,7 +186,7 @@ Ante este escenario, los cuatro profesionales manifestaron de forma unánime su 
 \newenvironment{alcances}{}{
 Para dar respuesta a la necesidad operativa de agilizar los diagnósticos técnicos, el proyecto se centra en el diseño y desarrollo de un prototipo funcional basado en la arquitectura de Generación Aumentada por Recuperación (RAG). El ámbito de aplicación abarca exclusivamente los sistemas de aire acondicionado tipo Split de muro o pared, instalados en entornos residenciales y comerciales ligeros. Específicamente, el asistente brindará soporte para equipos con tecnología Inverter y convencional que operen dentro de un rango de capacidad térmica de 9,000 a 24,000 BTU.
 
-A nivel de hardware, el marco de diagnóstico de la herramienta contempla el análisis de los componentes principales que estructuran estos equipos: la unidad interior, la unidad exterior, los sistemas de control, los sensores de temperatura y el sistema de drenaje. Para asegurar la viabilidad del desarrollo dentro de los plazos establecidos, el dominio operativo se acota a la resolución de exactamente quince fallas comunes y repetibles asociadas a dichos componentes, cuyo listado exhaustivo y categorización se documentan en el Anexo A.
+A nivel de hardware, el marco de diagnóstico de la herramienta contempla el análisis de los componentes principales que estructuran estos equipos: la unidad interior, la unidad exterior, los sistemas de control, los sensores de temperatura y el sistema de drenaje. Para asegurar la viabilidad del desarrollo dentro de los plazos establecidos, el dominio operativo se acota a la resolución de exactamente diecinueve fallas comunes y repetibles asociadas a dichos componentes, cuyo listado exhaustivo y categorización se documentan en el Anexo A.
 
 El motor de conocimiento del sistema se alimenta mediante un corpus técnico compuesto en su totalidad por manuales de servicio oficiales. Como resultado final, se construye un prototipo de software funcional, accesible a través de una interfaz de usuario, capaz de procesar consultas formuladas en lenguaje natural. Este aplicativo genera hipótesis de causa, secuencias de pasos para el diagnóstico y recomendaciones de mantenimiento básico, garantizando en todo momento la referenciación exacta del fragmento documental de origen que fundamenta la respuesta.
 }
@@ -229,7 +237,7 @@ El Capítulo 5, Presentación, Análisis e Interpretación de Resultados, expone
 
 El Capítulo 6, Conclusiones y Recomendaciones, sintetiza los principales logros del proyecto en relación con los objetivos planteados y propone líneas de trabajo futuro sustentadas en bibliografía científica, tales como el uso de bases de datos vectoriales avanzadas, técnicas de expansión de consultas y representación mediante grafos de conocimiento.
 
-Finalmente, el documento incluye dos anexos: el Anexo A contiene el catálogo exhaustivo de las quince fallas documentadas que conforman el dominio del sistema, y el Anexo B presenta el instrumento de evaluación y las transcripciones de las entrevistas realizadas a los técnicos durante la fase de comprensión del problema.
+Finalmente, el documento incluye dos anexos: el Anexo A contiene el catálogo exhaustivo de las diecinueve fallas documentadas que conforman el dominio del sistema, y el Anexo B presenta el instrumento de evaluación y las transcripciones de las entrevistas realizadas a los técnicos durante la fase de comprensión del problema.
 
 }
 
@@ -325,7 +333,7 @@ El análisis de la información recolectada evidenció que la búsqueda manual d
 
 Asimismo, se identificó que los técnicos recurren a herramientas de inteligencia artificial de propósito general, como ChatGPT, con el objetivo de agilizar sus procesos de diagnóstico. No obstante, dichas herramientas presentan limitaciones significativas \parencite{anhhoang2025survey}, tales como la generación de respuestas redundantes, ambiguas o carentes de contexto técnico específico por fabricante, lo cual introduce un riesgo operativo en escenarios reales de mantenimiento .
 
-A partir de estos hallazgos, se delimitó el dominio del proyecto al diagnóstico preliminar y mantenimiento de sistemas de aire acondicionado tipo split de muro, enfocados en entornos residenciales y comerciales ligeros, con capacidades entre 9,000 y 24,000 BTU, abarcando tanto tecnologías Inverter como convencionales. El alcance funcional se restringió a un conjunto estructurado de quince fallas comunes y recurrentes, asociadas a los principales componentes del sistema.
+A partir de estos hallazgos, se delimitó el dominio del proyecto al diagnóstico preliminar y mantenimiento de sistemas de aire acondicionado tipo split de muro, enfocados en entornos residenciales y comerciales ligeros, con capacidades entre 9,000 y 24,000 BTU, abarcando tanto tecnologías Inverter como convencionales. El alcance funcional se restringió a un conjunto estructurado de diecinueve fallas comunes y recurrentes, asociadas a los principales componentes del sistema.
 
 \section{Comprensión de los Datos}
 
@@ -393,8 +401,52 @@ Finalmente, se integró el modelo generativo Gemini 1.5 Pro para la construcció
 
 \newcommand{\anexos}{
 
-    \anexo{Primer anexo}{
-        
+    \anexo{Catálogo de Fallas Comunes en Aires Acondicionados tipo Split}{
+        \tabla{V}{
+          \begin{longtable}{|p{7.5cm}|p{7.5cm}|}
+            \hline
+            \textbf{Síntoma Observable} & \textbf{Posible Causa} \\
+            \hline
+            El equipo no arranca y muestra error interno & Falla de memoria (EEPROM) en la tarjeta electrónica interior \\
+            \hline
+            El compresor no inicia y aparece error en unidad exterior & Falla de memoria EEPROM en la tarjeta electrónica exterior \\
+            \hline
+            El equipo se apaga solo y muestra código de error & Posible fuga de refrigerante o sensor defectuoso \\
+            \hline
+            El equipo no enfría y muestra error & Sensor de temperatura abierto o en corto \\
+            \hline
+            Funcionamiento irregular o apagado inesperado & Sensor de temperatura defectuoso \\
+            \hline
+            Error de lectura de temperatura & Sensor de temperatura dañado \\
+            \hline
+            El equipo se protege y se detiene & Sensor de temperatura defectuoso \\
+            \hline
+            Apagado por protección térmica & Sensor de temperatura fuera de rango \\
+            \hline
+            El equipo se apaga por protección eléctrica & Sobrecorriente o bloqueo del sistema \\
+            \hline
+            El equipo se detiene inmediatamente después de encender & Protección del módulo de potencia (IPM) \\
+            \hline
+            El equipo no detecta temperatura ambiente & Sensor ambiente abierto o en corto \\
+            \hline
+            El equipo no enfría correctamente & Sensor del evaporador defectuoso \\
+            \hline
+            Ventilador exterior no gira correctamente & Falla del motor del ventilador exterior \\
+            \hline
+            El display no responde o muestra error & Falla de comunicación entre tarjeta electrónica y display \\
+            \hline
+            Bajo rendimiento y apagado del sistema & Detección de fuga de refrigerante \\
+            \hline
+            El equipo no arranca & Falla en módulo de potencia (IPM) \\
+            \hline
+            El equipo se apaga por protección & Bajo voltaje de alimentación \\
+            \hline
+            Protección por voltaje alto & Sobrevoltaje en la línea eléctrica \\
+            \hline
+            El compresor no inicia & Falla de arranque del compresor \\
+            \hline
+          \end{longtable}
+        }
     }
 
     \anexo{Segundo anexo}{
