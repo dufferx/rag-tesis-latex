@@ -188,7 +188,7 @@ Para dar respuesta a la necesidad operativa de agilizar los diagnósticos técni
 
 A nivel de hardware, el marco de diagnóstico de la herramienta contempla el análisis de los componentes principales que estructuran estos equipos: la unidad interior, la unidad exterior, los sistemas de control, los sensores de temperatura y el sistema de drenaje. Para asegurar la viabilidad del desarrollo dentro de los plazos establecidos, el dominio operativo se acota a la resolución de exactamente diecinueve fallas comunes y repetibles asociadas a dichos componentes, cuyo listado exhaustivo y categorización se documentan en el Anexo A.
 
-El motor de conocimiento del sistema se alimenta mediante un corpus técnico compuesto en su totalidad por manuales de servicio oficiales. Como resultado final, se construye un prototipo de software funcional, accesible a través de una interfaz de usuario, capaz de procesar consultas formuladas en lenguaje natural. Este aplicativo genera hipótesis de causa, secuencias de pasos para el diagnóstico y recomendaciones de mantenimiento básico, garantizando en todo momento la referenciación exacta del fragmento documental de origen que fundamenta la respuesta.
+El motor de conocimiento del sistema se alimenta mediante un corpus técnico compuesto en su totalidad por manuales de servicio oficiales. Como resultado final, se construye un prototipo de software funcional, accesible a través de una interfaz de usuario (cuyo diseño preliminar se ilustra en el \hyperlink{anexo:C}{Anexo C}), capaz de procesar consultas formuladas en lenguaje natural. Este aplicativo genera hipótesis de causa, secuencias de pasos para el diagnóstico y recomendaciones de mantenimiento básico, garantizando en todo momento la referenciación exacta del fragmento documental de origen que fundamenta la respuesta.
 }
 \newenvironment{limitaciones}{}{
     \begin{itemize}
@@ -361,8 +361,9 @@ La información vectorizada fue almacenada utilizando ChromaDB como base de dato
 
 En cuanto al componente de recuperación, se evaluaron diferentes configuraciones de búsqueda y síntesis de respuesta. Los resultados mostraron que el uso de estrategias como tree\_summarize proporciona una mayor coherencia lógica en consultas de diagnóstico complejo, mientras que el modo compact resulta más eficiente para consultas directas relacionadas con códigos de error .
 
-Finalmente, se integró el modelo generativo Gemini 1.5 Pro para la construcción de las respuestas \parencite{reid2024gemini}, configurado con parámetros orientados a la precisión y reducción de variabilidad. La configuración final del sistema representa el resultado de un proceso de optimización basado en evidencia experimental, en el cual cada componente fue seleccionado en función de su impacto medible en la calidad de las respuestas generadas. 
+Finalmente, se integró el modelo generativo Gemini 1.5 Pro para la construcción de las respuestas \parencite{reid2024gemini}, configurado con parámetros orientados a la precisión y reducción de variabilidad. La configuración final del sistema representa el resultado de un proceso de optimización basado en evidencia experimental, en el cual cada componente fue seleccionado en función de su impacto medible en la calidad de las respuestas generadas.
 
+De forma paralela a la configuración del motor lógico del sistema RAG, se desarrolló el diseño inicial de la interfaz gráfica web destinada a la interacción con el usuario final. Este prototipo contempla dos componentes funcionales principales: un sistema de chat conversacional, mediante el cual el técnico formula consultas en lenguaje natural y recibe respuestas fundamentadas en la base vectorial, y un módulo de gestión documental que permite la carga y administración de los manuales de servicio que alimentan el corpus técnico del sistema. Las capturas de pantalla correspondientes al diseño preliminar de esta interfaz se documentan como evidencia en el \hyperlink{anexo:C}{Anexo C}.
 
 }
 
@@ -449,13 +450,224 @@ Finalmente, se integró el modelo generativo Gemini 1.5 Pro para la construcció
         }
     }
 
-    \anexo{Segundo anexo}{
-       
+    \anexo{Instrumento de Evaluación y Transcripciones de Entrevistas}{
+
+    \sectionanexo{Entrevista 1: Edwin Roberto Quintanilla}
+
+    \textbf{Nombre:} Edwin Roberto Quintanilla\\
+
+    \textbf{¿Nos da su consentimiento para utilizar sus respuestas con fines académicos en esta investigación?}\\
+    Sí, doy mi consentimiento.
+
+    \textbf{¿Cuántos años tiene trabajando en mantenimiento de aires acondicionados tipo Split?}\\
+    En refrigeración y mantenimientos de aires llevo 3 años.
+
+    \textbf{¿Cuenta con formación técnica formal o aprendió de manera empírica?}\\
+    Los conocimientos que adquirí sobre refrigeración y aires acondicionados tipo mini Split fueron de manera empírica. Ya que en mi anterior trabajo dieron unas capacitaciones con respecto a esta rama de refrigeración, sin embargo, pues no solo me quedé con lo aprendido en esas capacitaciones, sino que a la hora de estar ejecutando pues me tocó ir aprendiendo. Entonces, en esas capacitaciones que fueron informales, se podría decir, no me otorgaron algún título; entonces, por esa manera, sí puedo decir en mi respuesta que ha sido de manera empírica.
+
+    \textbf{¿Trabaja principalmente solo o en equipo?}\\
+    Actualmente, sí, trabajo principalmente solo.
+
+    \textbf{¿Atiende múltiples marcas o se especializa en algunas específicas?}\\
+    Con respecto a la hora de la manipulación de los aires acondicionados tipo mini Split, ya sea convencional o Inverter, la marca, pues no, no tengo una especialización con una marca en específica. Sin embargo, pues tengo marcas con las que estoy más familiarizado, ¿verdad? Como Midea, York, Andina, LG, Mitsubishi, con las que, pues, en ciertas ocasiones he logrado tener la interacción con ese tipo de equipo, ya sea para un mantenimiento, una instalación o una reparación.
+
+    \textbf{Cuando llega a revisar un equipo que falla, ¿cuál es su secuencia típica de diagnóstico?}\\
+    Pues para dar un buen diagnóstico de un aire acondicionado, lo primero que hago es conectar la pinza amperimétrica para ver el consumo del equipo con respecto a lo de la placa del fabricante, ¿verdad? Ya que, pues, cada fabricante tiene sus diferentes especificaciones. Entonces, conectar también los manómetros como segunda parte, para ver en cuántas presiones está el refrigerante, en cuántos PSI, y también comparar los PSI con respecto a lo que dice la placa del equipo, ¿verdad? Ya que cada equipo, pues, dependiendo su capacidad de BTUs, varía la cantidad de refrigerante que tiene que poseer en el sistema, y también depende de la marca, ¿verdad? Ya que otros usan diferentes tipos de refrigerante. Entonces, como segundo paso es eso, ¿verdad? Encontrar, ver las mediciones. Ya después, con esos dos datos, parte el diagnóstico de si un componente eléctrico está dañado. Eso ya uno lo va viendo con respecto a cómo va destapando las unidades, ¿verdad? Tanto la evaporadora como la condensadora.
+
+    Y para seguir agregando más puntos, todo varía con respecto a lo que el cliente da como diagnóstico inicial, ¿verdad? Que el cliente dice: ``el equipo huele mal'', ``el equipo está botando agua'', ``el equipo no está enfriando''. Porque los anteriores pasos que he dicho es cuando el equipo no está enfriando o, pues, ha tenido fallas o no enciende. Ya si está goteando, pues se entiende que cuando un equipo está botando agua es porque no ha tenido su mantenimiento, ya que se recomienda que sea cada seis meses. Ya que, aunque el equipo no se utilice, está la unidad que está en el exterior, entonces pues esa unidad siempre recibe la contaminación del aire, ¿verdad? Uno entiende que esa unidad está a la intemperie, entonces necesita que tenga sus mantenimientos al día para que pueda hacer una buena transmisión de calor.
+
+    Entonces, pues, con respecto a hacer un diagnóstico, lo principal siempre primero es tomar mediciones, ya sea de refrigerante, que sería con los manómetros, y con el amperímetro para ver cuánto está consumiendo y cuánto está llegando de voltaje a los bornes. Ya de ahí se parte a los siguientes desglosamientos de diagnóstico, ¿verdad? Ya que, bueno, algunos diagnósticos en el momento los va a ver uno; qué es lo que se necesita. Bueno, siempre es el que uno logra verificar qué es lo que está pasando, ¿verdad? Ya sea que al ventilador se le quemara su capacitor, o sus bobinas se sobrecalentaran, o que el capacitor pues ya estuviera dañado. O la placa, porque bueno, hoy en día los equipos Inverter pues son demasiado ahorrativos; sin embargo, pues, el hecho de tener tantos sensores y que sean muy electrónicos, al no tener sus protecciones a la hora de tener una buena instalación, pues muchas veces se terminan dañando las placas. Entonces, también a veces hay que inspeccionar los bornes de las placas para ver si también llegan a su voltaje, o si no hay algún componente que se pueda ver a la vista que esté dañado, pues uno con el tester hace las correctas mediciones correspondientes al tipo de componente que uno va a estar verificando.
+
+    \textbf{¿En qué momento del proceso necesita consultar información externa (manual, internet, compañero de trabajo)?}\\
+    Con respecto a su pregunta, tengo dos respuestas. Bueno, mi respuesta es para dos opciones, que sería tanto la ayuda de un compañero como la ayuda de Internet. Ya que, pues, el Internet es esencial en este rubro para tener tablas con respecto a cada equipo, qué componentes lleva, el diagrama eléctrico... Ya que muchas veces, si uno no es la persona que ha instalado el aire, pues la gente termina botando los manuales, ¿verdad? Entonces, para adquirir esa información de los manuales sí necesita Internet uno; ya que, pues, si bien el equipo trae sus placas donde tiene esas especificaciones de refrigerante, de voltaje, de consumo, siempre tener el manual de servicio es algo importante.
+
+    Y también menciono que más allá de tener el Internet, que es un aliado demasiado bueno, también pues si uno tiene algún compañero... pues pongo este contexto de que a veces la experiencia de otra persona que ya tuviera fallas parecidas, o pues el conocimiento de años en este rubro, también siento que tiene su ayuda. Que también eso es algo que, pues sí, si muy bien con el Internet uno puede llevarse, pues a veces el hecho de tener a una persona con experiencia en el rubro también va de la mano. Pero también esas personas que ya tienen años en ese rubro no pueden desenvolverse, ¿verdad?, de una manera óptima, se puede decir. Porque, bueno, hoy la tecnología va avanzando demasiado, que pues los refrigerantes cambian, las tecnologías de la electrónica de los aires cambian bastante porque siempre van mejorando. Entonces, si bien es bueno tener ahí a una persona con la cual te puedas apoyar con una pregunta, que te pueda ayudar, pues siempre se necesita el Internet. Ya que, pues, a veces es muy complicado el hecho de tener capacitaciones constantes de los proveedores de los equipos, ya que no siempre las hay, ¿verdad? Entonces, la manera en la cual uno se puede defender bastante con conocimientos que sean correctos (porque en este rubro no se puede equivocar uno), pues es teniendo el Internet de la mano y saber buscar bien los manuales, porque eso es lo que lleva más tiempo.
+
+    \textbf{¿Qué tipo de fallas le obligan a buscar documentación? (Códigos de error, tarjetas electrónicas, sensores, fallas eléctricas, etc.)}\\
+    Bueno, de las fallas, se puede decir que más que todo para los códigos de error sí se necesita el Internet. Ya que, por mi caso, al tener un catálogo de varias marcas, pues no todas las veces el error es igual en todas las marcas. Entonces, sí, si bien en algunos errores cambian las palabras o son similares, no siempre el error ``3'' va a ser en Andina y luego va a ser en LG. Es muy difícil a veces que todos los errores sean muy iguales; siempre es mejor tener la base técnica en la cual uno no lo pueda estar, pues, inventando.
+
+    \textbf{Cuando no encuentra la información rápidamente, ¿qué suele ocurrir?}\\
+    Lo principal es que el servicio se retrasa. Ya que eso de la prueba y error retrasa todavía aún más, y pues el hecho de interpretar mal un manual... más que todo sería encontrar la información en el manual, porque el hecho de que uno esté interpretando un manual requiere tiempo. Entonces, la verdad es que el hecho de no tener el conocimiento a la mano, pues sí hace que un trabajo se extienda demasiado tiempo y pues ya no sea un trabajo que se puede ejecutar rápido, sino que por lo menos una hora, por decir un tiempo. Por el hecho de que, pues, siempre hay que tener la información correcta, no se puede buscar o usar prueba y error. Entonces, sí se necesita, sí o sí, una fuente muy confiable.
+
+    \textbf{¿Le ha ocurrido interpretar mal un manual?}\\
+    En mi caso no me ha pasado por el momento.
+
+    \textbf{¿Qué tan fáciles de entender considera que son los manuales de servicio?}\\
+    Siempre, pues, el manual es cuestión de perspectiva, ¿verdad? Ya que hay manuales que son de diferentes marcas, más ---se puede decir--- accesibles a la interpretación, ¿verdad? Entonces siento que, en ese caso, ya sea a la hora de leer un manual de servicio, siempre más allá de que sea fácil o difícil entenderlo, requiere su tiempo. Ya que, pues, estar buscando justamente en el manual que es para el equipo la pregunta, consulta o el dato técnico que se necesita, pues sí requiere un esfuerzo, ¿verdad? Un esfuerzo y tiempo para poder tener una conclusión buena.
+
+    \textbf{Cuando necesita información técnica, ¿qué consulta primero?}\\
+    El principal sería Google, ya que pues allí está la mayoría, o si no es que todos los manuales de servicio. Pero es bastante lento, ya que el hecho de encontrar la marca, el manual, la página y el apartado de lo que estás buscando es un proceso que sí necesita su tiempo. Y que también viene quedando bastante lento, como YouTube; ya que, pues sí hay muchos videos empíricos que explican diferentes cuestiones con respecto a la refrigeración. Volvemos a que no es una base técnica como uno esperaría en un manual de servicio. Entonces sí, los dos son pues bastante eficientes en su manera... bueno, no se puede decir eficiente porque lleva bastante tiempo, pero los dos ayudan. Sin embargo, no dejan siempre eso que se desea para que uno pueda facilitarse más.
+
+    \textbf{En promedio, ¿cuánto tiempo le toma encontrar la información cuando debe buscarla?}\\
+    Definitivamente sí, serían más de cinco minutos.
+
+    \textbf{Cuando necesita buscar información técnica y eso le toma varios minutos, ¿ese tiempo impacta la cantidad de servicios que puede realizar en el día?}\\
+    La falta de información inmediata definitivamente perjudica el tiempo de la ejecución de los trabajos. Ya que así como se pueden ver en un día tres equipos, solamente se puede llegar a ver uno por el hecho de que muchas veces el tener un dato técnico del equipo, de la ficha técnica, o que se pueda llegar a encontrar el manual de servicio... y no tener eso a la mano, puede retrasar toda la operación.
+
+    \textbf{Aproximadamente, ¿cuántos equipos atiende en promedio por día?}\\
+    El entrevistado no proporcionó una respuesta específica.
+
+    \textbf{¿Ha utilizado herramientas como ChatGPT u otras Inteligencias Artificiales para resolver fallas técnicas?}\\
+    Sí, actualmente pues he intentado implementar poco a poco la inteligencia artificial para poder ayudarme en el día a día con el trabajo.
+
+    \textbf{En una escala del 1 al 10, ¿qué tan confiables han sido las respuestas de la IA?}\\
+    Sería un 10, ya que la inteligencia artificial es una herramienta que hoy en día está en una constante evolución y a pasos agigantados, y el hecho de poderla implementar en mi trabajo ha sido algo estupendo. Ya que, al poder brindarle el contexto y también saber cómo preguntar o qué es lo que estoy preguntando, podemos entender cómo llegar a una respuesta con esa confianza total. Entonces sí, está muy bien hoy en día, pues, tener que la inteligencia artificial te ayude en algún tema. Bueno, en mi caso, en mi trabajo, me resulta a veces muy difícil, ya que pues me toma tiempo también el hecho de poder utilizarla de momento, porque tengo que... bueno, sería bueno que ella estuviera de la mano con el rubro de mi trabajo. Entonces, me ayuda bastante y puedo darle la confianza de 10; sin embargo, pues todavía siento que tuviera que trabajar más para llegar a la evolución que yo quisiera para poder implementarla en mi trabajo, pero esperaría que en su momento pueda tener algo parecido.
+
+    \textbf{¿Le redujo el tiempo comparado con buscar en un manual?}\\
+    Definitivamente sí; en comparación con los manuales, la inteligencia artificial me ha ayudado a ahorrar mucho más tiempo. Si podría decir que andar buscando en un manual podría ser de más de cinco minutos, la inteligencia artificial me acorta el tiempo bastante, bastante, bastante más.
+
+    \textbf{¿Alguna vez le dio una respuesta incorrecta?}\\
+    Respuestas incorrectas, mejor dicho, o respuestas con un contexto lejano a la pregunta que uno realiza. Ya que en ese caso siento que al no brindarle todo el contexto de que es un tema específico, como mi trabajo de refrigeración, pues muchas veces se puede quedar un poco corta la idea del conocimiento que brinda o la respuesta que uno necesita, ya que se sale un poco de contexto. Entonces, al tomarse uno el tiempo de poder elaborar unas preguntas y brindar el contexto, todo se soluciona. Sin embargo, lleva su tiempo, pero es mucho más sencillo que llevar una búsqueda en un manual de servicio.
+
+    \textbf{¿Confía más en la IA o en manuales oficiales?}\\
+    Pues al principio sí reconozco que siempre consultaba manuales de servicio. Sin embargo, pues, el tiempo de estar utilizando la inteligencia artificial me ha dado la confianza que también me transmiten los manuales de servicio para poder, pues, ejecutar mi trabajo con la inteligencia artificial de la mano. Y, definitivamente, buscar en manuales es mucho más tardado.
+
+    \textbf{¿Confía en la información que encuentra en grupos de técnicos o YouTube?}\\
+    Pues la verdad es que en grupos, foros o videos hay mucha información en la que uno, pues, puede confiar porque son de colegas que se dedican al mismo rubro. Sin embargo, pues uno no solo se puede quedar con el hecho de un video, sino que siempre hay que buscar en los manuales de servicio que son donde hay más información, y, en este caso que estaba implementando, usar Gemini para poder tener una respuesta más rápida.
+
+    \textbf{¿Qué le preocupa más del uso de Inteligencia Artificial en su trabajo?}\\
+    Lo principal es que es muy general. Ya que uno sí necesita estar enfocado en cada marca en su momento. Entonces la IA, al principio, es muy general y es donde uno puede cometer el error de no darle contexto y llegar a entender algo que no se puede hacer. Y pues si uno en este rubro hace algo que no va con respecto al fabricante que está en el manual de servicio, pues ahí uno termina demasiado mal, en problemas, arruinando el equipo. Entonces, sí, uno puede utilizar la IA, la idea es buena porque es rápida y tiene mucha información, pero también uno tiene que saber usar la herramienta. Y pues también, que la herramienta fuera más especializada en lo que necesito, ¿verdad? En cada marca.
+
+    \textbf{Si tuviera un asistente en su celular que solo responda basándose en Manuales de Servicio oficiales, muestre el fragmento exacto del manual, indique pasos numerados e incluya diagramas eléctricos, ¿le sería útil?}\\
+    Claramente sería útil. Ya que en mi rubro, ¿verdad?, que tengo un catálogo de diferentes marcas, el hecho de tener el manual de servicio de cada equipo, de cada marca, no es tan viable... bueno, para nada. Entonces, tener a la palma de mis manos el manual de servicio, o una herramienta que pueda ayudarme a interpretar el manual, o buscarme más allá de interpretar, y luego asegurarse que en el manual está esa información, sería estupendo.
+
+    \textbf{¿Lo usaría durante el servicio en campo o solo para capacitación?}\\
+    Es que, el hecho de tener a un asistente tan accesible y con unas funciones demasiado buenas, se tiene que usar sí o sí en el campo y para capacitaciones. Ya que es una herramienta... podría decir que se convertiría en una de las herramientas principales. El hecho de tener ese asistente, como en este rubro, ¿verdad?, es bueno tener un teléfono solo para el trabajo. El hecho es que, tener siempre cargado ese teléfono, es como dejar los manómetros en refrigeración, no se puede olvidar. Entonces, si llega a existir una herramienta con todas esas funciones, sí o sí se tiene que utilizar día a día.
+
+    Y sería una herramienta que a los colegas que están en este rubro de refrigeración les fascinaría, ya que simplemente con el hecho de saber que pudiera haber una inteligencia artificial con esas funciones, es muy increíble.
+
+    \vspace{1cm}
+
+    \sectionanexo{Entrevista 2: Daniel}
+
+    \textbf{¿Cuántos años tiene trabajando en mantenimiento de aires acondicionados tipo Split?}\\
+    Aproximadamente 3 años y medio.
+
+    \textbf{¿Cuenta con formación técnica formal o aprendió de manera empírica?}\\
+    Formación técnica.
+
+    \textbf{¿Trabaja principalmente solo o en equipo?}\\
+    Por lo general solo, aunque a veces se hacen instalaciones de aires en equipo.
+
+    \textbf{¿Atiende múltiples marcas o se especializa en algunas específicas?}\\
+    Atiende cualquier tipo de marcas de aires acondicionado.
+
+    \textbf{Cuando llega a revisar un equipo que falla, ¿cuál es su secuencia típica de diagnóstico?}\\
+    Menciona que todo depende de la falla que se esté presentando en el equipo, pero por lo general inicia con pruebas de encendido y apagado, pruebas de enfriamiento y procede con pruebas eléctricas.
+
+    \textbf{¿En qué momento del proceso necesita consultar información externa (manual, internet, compañero de trabajo)?}\\
+    Por lo general cuando es un error poco usual.
+
+    \textbf{¿Qué tipo de fallas le obligan a buscar documentación? (Códigos de error, tarjetas electrónicas, sensores, fallas eléctricas, etc.)}\\
+    Falla de sensores, fallas eléctricas, fallo de algún componente.
+
+    \textbf{Cuando no encuentra la información rápidamente, ¿qué suele ocurrir?}\\
+    En general se retrasa el servicio, y dependiendo si no es un error muy complejo procede a hacer prueba y error, siempre manteniendo el cuidado. Mencionó que sí le ha pasado que interpretó mal un manual, ya que al ser algo extensos y confusos, suele pasar que no se interpreta a la perfección.
+
+    \textbf{¿Qué tan fáciles de entender considera que son los manuales de servicio?}\\
+    Poco intuitivos y bastante tediosos de leer por lo general.
+
+    \textbf{Cuando necesita información técnica, ¿qué consulta primero?}\\
+    Directamente a una IA, en este caso mencionó ChatGPT, y esta persona le pasa los manuales técnicos que usa la empresa.
+
+    \textbf{En promedio, ¿cuánto tiempo le toma encontrar la información cuando debe buscarla?}\\
+    En promedio 1--5 minutos usando IA; si es de forma manual, más de 5 minutos.
+
+    \textbf{Cuando necesita buscar información técnica y eso le toma varios minutos, ¿ese tiempo impacta la cantidad de servicios que puede realizar en el día?}\\
+    Impacta de forma considerable, ya que retrasa mucho los siguientes servicios. Por lo general hace entre 7--8 servicios por día.
+
+    \textbf{¿Ha utilizado herramientas como ChatGPT u otras IA para resolver fallas técnicas?}\\
+    Sí, ChatGPT.
+
+    \textbf{En una escala del 1 al 10, ¿qué tan confiables han sido las respuestas?}\\
+    Lo considera un 8 sobre 10, a nivel de confianza.
+
+    \textbf{¿Le redujo el tiempo comparado con buscar en un manual?}\\
+    Sin duda, le ahorra muchísimo tiempo.
+
+    \textbf{¿Alguna vez le dio una respuesta incorrecta?}\\
+    Completamente incorrecta no, pero a veces es redundante con las respuestas, y se mantiene en el mismo círculo sin profundizar más.
+
+    \textbf{¿Confía más en IA o en manuales oficiales?}\\
+    En este caso menciona que en la IA, por el hecho que le pasa directamente el manual técnico y se basa puramente en ello.
+
+    \textbf{¿Confía en la información que encuentra en grupos o YouTube?}\\
+    Sí, por lo general al tener el conocimiento, según lo que ha buscado considera que ha sido información correcta y útil.
+
+    \textbf{¿Qué le preocupa más del uso de IA?}\\
+    Que brinde información errónea en algún punto.
+
+    \textbf{Si tuviera un asistente en su celular que solo responda basándose en Manuales de Servicio oficiales, muestre el fragmento exacto del manual, indique pasos numerados e incluya diagramas eléctricos, ¿le sería útil?}\\
+    Sin duda, menciona que sería muy útil.
+
+    \textbf{¿Lo usaría durante el servicio en campo o solo para capacitación?}\\
+    En ambos casos, principalmente más en servicio, ya que simplifica y ahorra mucho tiempo.
+
+    \textbf{¿Estaría dispuesto a pagar por una herramienta así si realmente le ahorra tiempo?}\\
+    Sí, el entrevistado menciona que actualmente paga ChatGPT, y sin duda considera que le ahorra bastante tiempo en su trabajo, para ser más productivo, y sin duda pagaría algo que estuviera mucho más especializado en dicho campo.
+
+    \vspace{1cm}
+
+    \sectionanexo{Entrevista 3: Técnico con formación en ingeniería mecánica}
+
+    \textbf{¿Cuántos años tiene trabajando en mantenimiento de aires acondicionados tipo Split?}\\
+    He trabajado en el rubro por 6 meses.
+
+    \textbf{¿Cuenta con formación técnica formal o aprendió de manera empírica?}\\
+    Formación universitaria en ingeniería mecánica.
+
+    \textbf{¿Trabaja principalmente solo o en equipo?}\\
+    Usualmente en equipo.
+
+    \textbf{¿Atiende múltiples marcas o se especializa en algunas específicas?}\\
+    He trabajado múltiples marcas y diferentes dispositivos.
+
+    \textbf{Cuando llega a revisar un equipo que falla, ¿cuál es su secuencia típica de diagnóstico?}\\
+    Verificar la falla reportada, realizar preguntas, consultar información o manuales y solucionar el problema.
+
+    \textbf{¿En qué momento del proceso necesita consultar información externa (manual, internet, compañero de trabajo)?}\\
+    Cuando ya no encuentro la información por mi cuenta o necesito una segunda opinión.
+
+    \textbf{¿Qué tipo de fallas le obligan a buscar documentación? Cuando no encuentra la información rápidamente, ¿qué suele ocurrir?}\\
+    Cuando los dispositivos muestran códigos de error me veo forzado a consultar en internet. El servicio puede retrasarse dependiendo de la complejidad y a veces toca hacer prueba y error, los manuales se interpretan bien sin tanta complicación.
+
+    \textbf{¿Qué tan fáciles de entender considera que son los manuales de servicio?}\\
+    Son fáciles de entender, pero muchos manuales considero que están incompletos o sería bueno que el fabricante diera más información.
+
+    \textbf{Cuando necesita información técnica, ¿qué consulta primero?}\\
+    Si tuviera que ponerles un orden: primero YouTube, segundo grupos de técnicos, luego manuales de servicios y Google.
+
+    \textbf{En promedio, ¿cuánto tiempo le toma encontrar la información cuando debe buscarla?}\\
+    Por lo general suele durar de 1 a 5 minutos.
+
+    \textbf{Cuando necesita buscar información técnica y eso le toma varios minutos, ¿ese tiempo impacta la cantidad de servicios que puede realizar en el día? Aproximadamente, ¿cuántos equipos atiende en promedio por día?}\\
+    No impacta mucho, a menos que verdaderamente sea algo muy complejo. Por lo general si es mantenimiento correctivo, 3 equipos y si son rutinas preventivas o correctivas leves ya programadas pueden ser 6 equipos.
+
+    \textbf{¿Ha utilizado herramientas como ChatGPT u otras IA para resolver fallas técnicas?}\\
+    Sí las he utilizado para resolver fallas técnicas. Por lo general, las respuestas son confiables; en una escala de 1 al 10 diría que 7. Sí ayuda, es menor el tiempo a manualmente consultar un documento o manual, pero siempre hay que validar la información.
+
+    \textbf{¿Confía en la información que encuentra en grupos o YouTube? ¿Qué le preocupa más del uso de IA?}\\
+    Sí confío en la información de grupos y YouTube. Me preocupa que sea una respuesta muy general y no abunde en la información.
+
+    \textbf{Si tuviera un asistente en su celular que solo responda basándose en Manuales de Servicio oficiales, muestre el fragmento exacto del manual, indique pasos numerados e incluya diagramas eléctricos, ¿le sería útil?}\\
+    Que el asistente indique pasos numerados de cómo solucionar o dar mantenimiento, e incluya diagramas eléctricos.
+
+    \textbf{¿Lo usaría durante el servicio en campo o solo para capacitación?}\\
+    Lo usaría para ambos, tal vez más para capacitación.
+
+    \textbf{¿Estaría dispuesto a pagar por una herramienta así si realmente le ahorra tiempo?}\\
+    No, creo que es un poco exagerado ya que la verdad no realiza mucho para que sea justificado pagar por ello.
+
     }
 
-    \anexo{Tercer anexo}{
-        
+    \anexo{Diseño Preliminar de la Interfaz de Usuario}{
+
+    A continuación se presentan las capturas de pantalla correspondientes al diseño preliminar de la interfaz gráfica web del sistema de Generación Aumentada por Recuperación. Estas evidencias documentan los dos componentes funcionales principales del prototipo: el sistema de chat conversacional para consultas de diagnóstico y el módulo de gestión documental para la carga de manuales técnicos.
+
+    \imagenanexo{frontend1.jpeg}{Interfaz principal del asistente de diagnóstico}{0.14}{V}
+
+    \imagenanexo{frontend2.jpeg}{Módulo de gestión y carga de manuales técnicos}{0.14}{V}
+
     }
-    
 
 }
