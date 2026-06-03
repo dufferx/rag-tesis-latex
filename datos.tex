@@ -405,6 +405,162 @@ Aunque estos perfiles no constituyen un sistema de autenticación productivo, so
 
 \capitulo{Presentación, Análisis e Interpretación de Resultados}{
 
+Este capítulo expone los resultados obtenidos durante la fase de evaluación del prototipo del asistente de diagnóstico basado en Generación Aumentada por Recuperación (RAG) para aires acondicionados tipo Split. La evaluación se estructuró en dos dimensiones complementarias: la verificación funcional de los casos de uso definidos en el Plan de Pruebas Técnicas, y la validación de la experiencia con cinco usuarios finales del dominio HVAC mediante un instrumento de evaluación estructurado. Se complementa el análisis con la documentación crítica de las limitaciones operativas y los casos borde identificados, presentados como hallazgos de alto valor ingenieril que delimitan el alcance actual del sistema y orientan el trabajo futuro.
+
+\section{Resultados de la Evaluación con Usuarios Finales}
+
+Se realizaron cinco sesiones de evaluación entre el 26 de mayo y el 2 de junio de 2026, con participantes del sector técnico de climatización cuya experiencia oscila entre menos de un año y cinco años en la profesión. Los técnicos evaluaron el prototipo utilizando manuales de servicio reales de cuatro fabricantes distintos: Daikin (tres sesiones, modelos FTXR-T Series, FTXS-L/FDXS-L Series y FTX18-24UVJU), Mabe (Tundra Inverter Series) y Toshiba (RAS-E2KVG Series). La heterogeneidad de los manuales empleados permitió verificar que el comportamiento del sistema no se limita a una sola marca o modelo, sino que responde de manera consistente ante documentos técnicos de distinta procedencia y estructura interna.
+
+\subsection{Métricas de Usabilidad e Integración del Flujo de Trabajo}
+
+El 100\,\% de los participantes (5 de 5) completó la evaluación de principio a fin, logró cargar el manual de servicio en el prototipo de forma exitosa y confirmó que la indexación del documento finalizó correctamente. En cuanto al tiempo de espera durante la fase de carga e indexación, los cinco usuarios respondieron \textit{Muy de acuerdo} ante el ítem \textit{``El tiempo de espera para poder consultar el manual fue aceptable''}, lo que equivale a una tasa de aceptación unánime en esta métrica. Esta unanimidad es un indicador relevante dado que la indexación requirió estrategias de procesamiento por lotes para respetar los límites de la API gratuita y, pese a ello, la espera resultó tolerable para la totalidad de los evaluadores.
+
+Asimismo, los cinco participantes respondieron \textit{Muy de acuerdo} ante el ítem \textit{``El prototipo funcionó sin errores técnicos visibles durante la prueba''}, confirmando la estabilidad operativa del sistema a lo largo de todas las sesiones de evaluación. La coincidencia de ambas métricas con el valor máximo de la escala sugiere que la interfaz de usuario logró abstraer adecuadamente los procesos internos del \textit{pipeline} RAG, presentando al técnico una experiencia fluida sin exposición a errores de bajo nivel.
+
+En las métricas de diseño de la interfaz, cuatro de cinco usuarios indicaron \textit{Muy de acuerdo} ante la facilidad para subir el manual PDF y ante la correcta identificación visual del documento cargado; un usuario respondió \textit{Ligeramente de acuerdo} en ambos ítems. La métrica sobre la claridad del flujo desde la carga hasta el chat presentó mayor variabilidad: tres usuarios respondieron \textit{Ligeramente de acuerdo} y dos \textit{Muy de acuerdo}, lo que señala una oportunidad de mejora en la guía visual al usuario durante la transición entre la etapa de carga y la interfaz conversacional.
+
+\subsection{Métricas de Calidad de las Respuestas}
+
+Los resultados en las dimensiones de calidad de las respuestas presentan un panorama generalmente favorable, con excepción de un caso crítico que se analiza en la sección siguiente. A continuación se presentan las distribuciones de respuesta para los principales ítems del instrumento de evaluación.
+
+% =========================================================
+% TABLA 5.1 — Resumen Likert del instrumento de evaluación
+% =========================================================
+\tabla{H}{
+  \begin{longtable}{|p{9cm}|c|c|c|c|c|}
+    \caption{Distribución de respuestas Likert del instrumento de evaluación del prototipo}\label{tab:resumen_evaluacion}\\
+    \hline
+    \textbf{Ítem evaluado} & \textbf{MDA} & \textbf{LDA} & \textbf{N} & \textbf{LDE} & \textbf{MDE} \\
+    \hline
+    \endfirsthead
+    \captioncontinuacion{Distribución de respuestas Likert del instrumento de evaluación del prototipo}\\ \hline
+    \textbf{Ítem evaluado} & \textbf{MDA} & \textbf{LDA} & \textbf{N} & \textbf{LDE} & \textbf{MDE} \\
+    \hline \endhead
+    El tiempo de espera para consultar el manual fue aceptable & 5 & 0 & 0 & 0 & 0 \\
+    \hline
+    El prototipo funcionó sin errores técnicos visibles & 5 & 0 & 0 & 0 & 0 \\
+    \hline
+    El proceso para subir el manual PDF fue fácil de entender & 4 & 1 & 0 & 0 & 0 \\
+    \hline
+    El asistente entendió correctamente las preguntas realizadas & 4 & 0 & 0 & 0 & 1 \\
+    \hline
+    Las respuestas fueron claras y fáciles de comprender & 4 & 1 & 0 & 0 & 0 \\
+    \hline
+    La información técnica fue suficientemente precisa para tomar decisiones de mantenimiento & 4 & 1 & 0 & 0 & 0 \\
+    \hline
+    El asistente mantuvo el contexto entre una pregunta y otra & 4 & 1 & 0 & 0 & 0 \\
+    \hline
+    El lenguaje utilizado fue adecuado para el perfil del usuario & 4 & 1 & 0 & 0 & 0 \\
+    \hline
+    Las respuestas fueron útiles para diagnosticar problemas HVAC & 3 & 1 & 1 & 0 & 0 \\
+    \hline
+    Las fuentes mostradas fueron relevantes para la respuesta & 3 & 1 & 1 & 0 & 0 \\
+    \hline
+    Las respuestas parecieron estar basadas en el manual cargado & 3 & 1 & 0 & 0 & 1 \\
+    \hline
+    El asistente evitó respuestas genéricas cuando el manual tenía información específica & 3 & 1 & 1 & 0 & 0 \\
+    \hline
+    El asistente diferenció entre recomendaciones para usuario final y tareas que requieren técnico especializado & 1 & 0 & 3 & 1 & 0 \\
+    \hline
+    Las recomendaciones incluyeron advertencias de seguridad cuando eran necesarias & 1 & 1 & 2 & 1 & 0 \\
+    \hline
+    \multicolumn{6}{l}{\small \textit{Nota:} MDA~=~Muy de acuerdo; LDA~=~Ligeramente de acuerdo; N~=~Neutral; LDE~=~Ligeramente en desacuerdo; MDE~=~Muy en desacuerdo.}\\
+    \multicolumn{6}{l}{\small Fuente: Elaboración propia (2026), basada en instrumento de evaluación aplicado a cinco técnicos HVAC.}\\
+  \end{longtable}
+}
+
+Como se observa en la \reftab{tab:resumen_evaluacion}, la claridad de las respuestas generadas fue calificada como \textit{Muy de acuerdo} por cuatro de cinco usuarios, mientras que la utilidad para diagnosticar o comprender problemas HVAC obtuvo tres respuestas \textit{Muy de acuerdo}, una \textit{Ligeramente de acuerdo} y una \textit{Neutral}. Esta distribución refleja que los usuarios con mayor experiencia técnica esperaban, en algunos casos, respuestas con mayor profundidad procedimental o mayor densidad de pasos verificables. La métrica de precisión técnica para apoyar decisiones de mantenimiento obtuvo cuatro respuestas \textit{Muy de acuerdo} y una \textit{Ligeramente de acuerdo}, reforzando la utilidad práctica del sistema en el contexto del operario de campo.
+
+% =========================================================
+% FIGURA 5.1 — Gráfico de barras: métricas de calidad
+% Exportar del informe de Microsoft Forms y guardar en img/
+% Nombre sugerido: fig5_1_calidad_respuestas.png
+% =========================================================
+\begin{center}
+\textit{[Insertar Figura~5.1: Gráfico de barras --- Distribución de respuestas por dimensión de calidad de las respuestas del asistente. Fuente: informe de Microsoft Forms.]}
+\end{center}
+
+La métrica sobre fuentes relevantes mostradas al usuario obtuvo tres respuestas \textit{Muy de acuerdo}, una \textit{Ligeramente de acuerdo} y una \textit{Neutral}. Esto es coherente con la observación registrada por el participante que evaluó el manual de Toshiba, quien anotó que en una de las consultas comunes el sistema no citó fuentes del manual. Este comportamiento es atribuible a las diferencias en el modo de síntesis empleado según el tipo de consulta: las búsquedas directas priorizan la eficiencia reduciendo el número de llamadas a la API, lo que ocasionalmente omite la referencia explícita al fragmento fuente.
+
+\subsection{Análisis Crítico: Polarización en la Comprensión de Consultas}
+\label{sec:polarizacion}
+
+El ítem con mayor dispersión de respuestas fue \textit{``El asistente entendió correctamente las preguntas realizadas''}, donde cuatro usuarios respondieron \textit{Muy de acuerdo} y un usuario respondió \textit{Muy en desacuerdo}, tal como se ilustra en la Figura~5.2.
+
+% =========================================================
+% FIGURA 5.2 — Gráfico de pastel: comprensión de preguntas
+% Exportar del informe de Microsoft Forms y guardar en img/
+% Nombre sugerido: fig5_2_comprension_preguntas.png
+% =========================================================
+\begin{center}
+\textit{[Insertar Figura~5.2: Gráfico de pastel --- Distribución de respuestas para el ítem ``El asistente entendió correctamente las preguntas realizadas''. Fuente: informe de Microsoft Forms.]}
+\end{center}
+
+Este único caso de disconformidad severa corresponde a la sesión en la que se evaluó el manual Mabe Tundra Inverter Series. El análisis de las preguntas formuladas por dicho participante revela que las consultas empleadas fueron altamente coloquiales y escuetamente formuladas: \textit{``La unidad evaporada se congela''}, sin especificación de síntomas adicionales, condiciones ambientales ni historial previo del equipo. Este tipo de consulta omite el contexto técnico mínimo necesario para que el recuperador identifique fragmentos diagnósticos de alta relevancia: una frase breve sin vocabulario técnico especializado genera vectores de consulta que no se alinean con precisión a los fragmentos del manual, produciéndose respuestas más genéricas que el usuario percibe como falta de comprensión. Este patrón es consistente con los resultados de las pruebas funcionales de nivel avanzado, donde consultas coloquiales similares produjeron los puntajes de similitud más bajos de toda la batería de recuperación, limitando a su vez la calidad de la síntesis generada por el modelo.
+
+Adicionalmente, el mismo participante indicó \textit{Muy en desacuerdo} ante el ítem \textit{``Las respuestas parecieron estar basadas en el manual cargado''}, lo que sugiere que cuando el sistema produce una respuesta genérica ante una consulta imprecisa, el usuario no percibe la trazabilidad con el documento fuente, aunque técnicamente el sistema sí recuperó fragmentos del manual. Este hallazgo señala la necesidad futura de implementar mecanismos de retroalimentación iterativa que orienten al usuario hacia formulaciones más estructuradas cuando la consulta inicial resulta demasiado ambigua para una recuperación semántica precisa.
+
+\subsection{Métricas de Seguridad y Diferenciación de Perfil Técnico}
+
+Las métricas de seguridad presentaron la mayor dispersión del instrumento. El ítem \textit{``El asistente diferenció entre recomendaciones para usuario final y tareas que requieren técnico especializado''} obtuvo tres respuestas \textit{Neutral}, una \textit{Muy de acuerdo} y una \textit{Ligeramente en desacuerdo}. De manera similar, el ítem sobre la inclusión de advertencias de seguridad obtuvo una \textit{Muy de acuerdo}, una \textit{Ligeramente de acuerdo}, dos \textit{Neutral} y una \textit{Ligeramente en desacuerdo}. Esta dispersión indica que el comportamiento del prototipo en materia de escalación de responsabilidad técnica y comunicación de riesgos no es consistente entre sesiones, constituyendo un área de mejora prioritaria para versiones futuras del sistema, independientemente de los resultados favorables en las dimensiones de usabilidad y calidad de respuestas.
+
+% =========================================================
+% FIGURA 5.3 — Gráfico de barras: métricas de seguridad
+% Exportar del informe de Microsoft Forms y guardar en img/
+% Nombre sugerido: fig5_3_seguridad_diferenciacion.png
+% =========================================================
+\begin{center}
+\textit{[Insertar Figura~5.3: Gráfico de barras --- Distribución de respuestas en métricas de seguridad y diferenciación de perfil técnico. Fuente: informe de Microsoft Forms.]}
+\end{center}
+
+\section{Casos de Uso y Verificación Funcional}
+
+Durante las cinco sesiones de evaluación, los participantes formularon un total de quince preguntas específicas y diez preguntas de categoría común, cubriendo escenarios de diagnóstico representativos del trabajo cotidiano del técnico en campo. El análisis cualitativo de estas interacciones permite identificar patrones claros de comportamiento del sistema ante distintos tipos de consulta, así como el impacto real de la herramienta en la eficiencia del proceso diagnóstico.
+
+\subsection{Desempeño ante Preguntas Comunes}
+
+Las preguntas comunes incluyeron consultas sobre síntomas frecuentes en equipos tipo Split, tales como el congelamiento de la unidad evaporadora, ruidos durante el arranque del compresor y procedimientos de mantenimiento preventivo. Ante estos escenarios, el sistema demostró capacidad efectiva de mapeo semántico: las respuestas generadas obtuvieron calificaciones de \textit{Alto} y \textit{Muy Alto} en claridad, alineación con el manual y utilidad para resolver la duda, con trazabilidad confirmada de fuentes en la mayoría de los casos. El sistema recuperó fragmentos específicos de los manuales cargados y los sintetizó en respuestas coherentes, reduciendo el tiempo de búsqueda manual que en condiciones normales implicaría navegar entre decenas o cientos de páginas de documentación técnica.
+
+No obstante, en al menos una sesión se documentó que el asistente no citó fuentes del manual en una de las preguntas comunes, observación registrada directamente por el participante que evaluó el equipo Toshiba. Este comportamiento es atribuible al modo de síntesis empleado para consultas de bajo nivel de complejidad, que optimiza la eficiencia de las llamadas a la API priorizando la concisión sobre la trazabilidad explícita de las fuentes. Este hallazgo refuerza la recomendación de aplicar de forma sistemática el modo de síntesis orientado a la completitud para todas las consultas que requieran evidencia documental explícita.
+
+\subsection{Desempeño ante Preguntas Específicas}
+
+Las preguntas específicas abarcaron tres niveles de complejidad diagnóstica. En el nivel básico, los usuarios consultaron códigos de error documentados directamente en los manuales cargados: \textit{``La placa muestra un error llamado E6, ¿qué puedo hacer?''} (manual Daikin), \textit{``Me tira el código 1C en el equipo, ¿qué falla es y qué sensor tengo que desconectar en la tarjeta interior para probar?''} (manual Toshiba) y \textit{``El equipo se enfrentó a una alteración súbita de energía eléctrica y muestra un código en el display''} (manual Daikin FTX). En los tres casos, las respuestas recibieron calificaciones de \textit{Muy Alto} en claridad y alineación con el manual, con trazabilidad de fuentes confirmada, resultado consistente con el comportamiento esperado del sistema ante consultas directas de código de error.
+
+En el nivel de complejidad media, el sistema respondió satisfactoriamente ante consultas de diagnóstico diferencial como \textit{``La válvula de succión no está funcionando, ¿qué puedo hacer?''}, \textit{``Cuando empieza a trabajar el compresor, hay un ruido extraño, ¿qué podría causarlo?''} y \textit{``Hace un tiempo que el aire arroja lo que parecieran ser trozos de hielo o escarcha y le cuesta enfriar''}. Estas consultas requieren que el sistema sintetice información de varias secciones del manual (síntomas, causas probables y procedimientos de verificación), capacidad que el prototipo demostró de manera consistente al relacionar el síntoma descrito con las fichas diagnósticas correspondientes del documento fuente.
+
+En el nivel avanzado, el participante con mayor experiencia (entre 3 y 5 años) formuló consultas que requerían explícitamente la interpretación de diagramas y esquemas del manual: \textit{``¿Podría explicar a detalle las funciones principales de este tipo de aires y mostrar diagramas relevantes?''} y \textit{``En base al manual, explica y muestra un diagrama de cómo se quita correctamente la caja eléctrica del evaporador''}. En estos casos, el sistema proporcionó descripciones textuales correctas de los procedimientos, pero sin capacidad de identificar, referenciar ni describir el contenido visual específico de los diagramas embebidos en el manual, limitante que se detalla en la Sección~\ref{sec:limitante_multimodal}.
+
+\subsection{Impacto en la Productividad del Técnico}
+
+Los resultados consolidados de las quince preguntas específicas muestran que en 14 de 15 casos (93\,\%) las respuestas fueron calificadas como correctas y completas por los evaluadores. El sistema referenciando fuentes obtuvo una tasa de citación explícita del manual en 13 de 15 preguntas específicas (87\,\%), con dos casos de citación parcial y ningún caso de ausencia total de fuente en este bloque. Estas métricas sustentan la conclusión de que el prototipo reduce significativamente el esfuerzo de búsqueda manual: en lugar de navegar entre 100 y 200 páginas de documentación técnica, el técnico recibe una respuesta sintetizada con trazabilidad al manual fuente en un tiempo de entre 2 y 10 segundos según la complejidad de la consulta. Para un operario en campo que debe tomar decisiones con el equipo detenido y el cliente presente, esta reducción del tiempo de diagnóstico representa una ventaja operativa directa.
+
+\section{Limitaciones del Sistema y Casos Borde}
+\label{sec:limitaciones}
+
+La evaluación del prototipo permitió identificar tres limitaciones operativas de relevancia para el trabajo futuro. Estas se presentan no como deficiencias del diseño, sino como hallazgos ingenieriles documentados que delimitan el alcance actual del sistema y justifican líneas específicas de investigación futura.
+
+\subsection{Límite de Cuota y Degradación ante Carga Masiva}
+
+El sistema opera sobre la capa gratuita de la API de Google AI Studio, que establece límites de peticiones por minuto y de tokens por minuto tanto para el proceso de indexación de documentos como para la generación de respuestas. Durante las pruebas de carga del \textit{pipeline}, la indexación completa de un manual de servicio requirió una estrategia de procesamiento por lotes con pausas entre solicitudes para evitar errores de cuota excedida (HTTP 429), lo que extendió el tiempo de preparación del sistema a aproximadamente 7 minutos por manual. Si bien este tiempo fue calificado como aceptable por los usuarios en sesiones individuales con un solo documento, un escenario de uso concurrente con múltiples técnicos cargando manuales simultáneamente saturará los límites de la cuota gratuita, degradando el rendimiento o generando fallos en las consultas sin mensaje de error comprensible para el usuario final.
+
+Esta restricción representa una limitación estructural del entorno de desarrollo académico y no una deficiencia del \textit{pipeline} RAG en sí mismo. La migración a un plan de API de pago con límites de cuota ampliados, o la incorporación de modelos de generación de código abierto desplegados localmente, constituye el camino técnico para resolver esta limitación en una versión productiva del sistema orientada a uso corporativo.
+
+\subsection{Alucinación por Transferencia de Dominio}
+
+El hallazgo de mayor riesgo operativo identificado durante las pruebas corresponde al caso borde documentado al consultar: \textit{``¿Cómo reparo la tarjeta inversora de un equipo VRF de 10 toneladas?''}. Ante esta consulta, el sistema generó un procedimiento técnico detallado y aparentemente confiable, incluyendo la verificación de arneses, la medición del voltaje en el condensador electrolítico (320\,VDC), la inspección del puente de diodos y el uso de un analizador de inversor específico, sin emitir ninguna advertencia sobre el hecho de que el equipo VRF de 10 toneladas consultado no está documentado en ninguna página del manual cargado.
+
+Este comportamiento constituye una \textit{alucinación por transferencia de dominio}: el recuperador identificó nodos semánticamente relacionados con el término ``tarjeta inversora'', correspondientes al equipo Split residencial documentado en el manual fuente, y el modelo generativo los sintetizó como una respuesta confiada sin verificar si el tipo de equipo consultado se encontraba dentro del alcance del documento. La evaluación manual de esta respuesta obtuvo la calificación más baja de toda la batería de pruebas funcionales, siendo el único caso con alucinación confirmada. El riesgo operativo real es significativo: un técnico de campo podría aplicar, de buena fe, procedimientos diseñados para un equipo Split residencial de baja capacidad a un sistema VRF de alta capacidad industrial, con potencial daño al equipo, pérdida económica para el cliente o riesgo para la integridad física del técnico. Este hallazgo justifica la implementación futura de mecanismos de \textit{guardrails} de seguridad: clasificadores previos a la generación que verifiquen si el tipo de equipo consultado está explícitamente cubierto por el manual fuente antes de producir una respuesta.
+
+\subsection{Limitante Multimodal}
+\label{sec:limitante_multimodal}
+
+Durante la sesión de evaluación con el manual Daikin FTXS-L/FDXS-L Series, el participante con mayor experiencia técnica formuló consultas que requerían explícitamente la interpretación de diagramas eléctricos y de instalación. En ambos casos, el sistema proporcionó descripciones textuales de los componentes sin poder identificar, referenciar ni describir el contenido visual específico de los diagramas embebidos en el manual. Esta limitante fue identificada y señalada durante la reunión de seguimiento del trabajo de graduación con el director del proyecto.
+
+El \textit{pipeline} RAG del prototipo opera sobre representaciones puramente textuales extraídas del PDF: las páginas de diagramas eléctricos son procesadas como texto plano con referencias numéricas a componentes que carecen del contexto visual asociado. El modelo generativo empleado en el entorno del prototipo carece de capacidad multimodal nativa para interpretar imágenes embebidas en los documentos indexados. Por consiguiente, ante cualquier consulta que requiera razonamiento sobre esquemas eléctricos, diagramas de tuberías, diagramas de flujo de diagnóstico visual o tablas de valores gráficas, el sistema produce respuestas genéricas basadas únicamente en las descripciones textuales disponibles, que en los manuales de servicio suelen ser insuficientes para guiar al técnico en procedimientos que requieren el apoyo visual del diagrama original.
+
+Esta limitante es inherente a la arquitectura actual del prototipo y no puede resolverse mediante ajustes de parámetros del sistema: su resolución requiere la integración de un modelo generativo con capacidad de procesamiento multimodal nativa, tal como se detalla en las recomendaciones del Capítulo~6.
+
 }
 }
 
