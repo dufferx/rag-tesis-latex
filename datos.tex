@@ -59,7 +59,7 @@
 \autor{Mario Antonio Martinez Villatoro}{M}{carreraUno} % Autor 3 (opcional)
 \autor{}{}{} % Autor 4 (opcional)
 
-\newcommand{\mesdegraduacion}{Abril 2026} % Mes y año de graduación
+\newcommand{\mesdegraduacion}{Junio 2026} % Mes y año de graduación
 
 %================================================================
 %            Sección editable para segunda portada
@@ -82,8 +82,8 @@
 \newcommand{\sexoDirectorDeCarreraDos}{} % Sexo del segundo director de carrera
 \newcommand{\directorDeTrabajo}{James Edward Humberstone Morales} % Director del trabajo de graduación
 \newcommand{\sexoDirectorDeTrabajo}{masculino} % Sexo del secretario o secretaria general
-\newcommand{\lector}{nombre del lector} % Nombre del lector o lectora
-\newcommand{\sexoLector}{masculino} % Sexo del lector o lectora
+%\newcommand{\lector}{nombre del lector} % Nombre del lector o lectora
+%\newcommand{\sexoLector}{masculino} % Sexo del lector o lectora
 
 %=================================================================
 %            Sección editable para agradecimientos
@@ -478,9 +478,7 @@ Como se observa en la \reftab{tab:resumen_evaluacion}, la claridad de las respue
 % Exportar del informe de Microsoft Forms y guardar en img/
 % Nombre sugerido: fig5_1_calidad_respuestas.png
 % =========================================================
-\begin{center}
-\textit{[Insertar Figura~5.1: Gráfico de barras --- Distribución de respuestas por dimensión de calidad de las respuestas del asistente. Fuente: informe de Microsoft Forms.]}
-\end{center}
+\imagen{figura5-1.png}{Distribución de respuestas por dimensión de calidad}{false}{Elaboración propia}{0.3}{V}
 
 La métrica sobre fuentes relevantes mostradas al usuario obtuvo tres respuestas \textit{Muy de acuerdo}, una \textit{Ligeramente de acuerdo} y una \textit{Neutral}. Esto es coherente con la observación registrada por el participante que evaluó el manual de Toshiba, quien anotó que en una de las consultas comunes el sistema no citó fuentes del manual. Este comportamiento es atribuible a las diferencias en el modo de síntesis empleado según el tipo de consulta: las búsquedas directas priorizan la eficiencia reduciendo el número de llamadas a la API, lo que ocasionalmente omite la referencia explícita al fragmento fuente.
 
@@ -494,9 +492,7 @@ El ítem con mayor dispersión de respuestas fue \textit{``El asistente entendi�
 % Exportar del informe de Microsoft Forms y guardar en img/
 % Nombre sugerido: fig5_2_comprension_preguntas.png
 % =========================================================
-\begin{center}
-\textit{[Insertar Figura~5.2: Gráfico de pastel --- Distribución de respuestas para el ítem ``El asistente entendió correctamente las preguntas realizadas''. Fuente: informe de Microsoft Forms.]}
-\end{center}
+\imagen{figura5-2.png}{Distribución de respuestas para el ítem ``El asistente entendió correctamente las preguntas realizadas''}{false}{Elaboración propia}{0.3}{V}
 
 Este único caso de disconformidad severa corresponde a la sesión en la que se evaluó el manual Mabe Tundra Inverter Series. El análisis de las preguntas formuladas por dicho participante revela que las consultas empleadas fueron altamente coloquiales y escuetamente formuladas: \textit{``La unidad evaporada se congela''}, sin especificación de síntomas adicionales, condiciones ambientales ni historial previo del equipo. Este tipo de consulta omite el contexto técnico mínimo necesario para que el recuperador identifique fragmentos diagnósticos de alta relevancia: una frase breve sin vocabulario técnico especializado genera vectores de consulta que no se alinean con precisión a los fragmentos del manual, produciéndose respuestas más genéricas que el usuario percibe como falta de comprensión. Este patrón es consistente con los resultados de las pruebas funcionales de nivel avanzado, donde consultas coloquiales similares produjeron los puntajes de similitud más bajos de toda la batería de recuperación, limitando a su vez la calidad de la síntesis generada por el modelo.
 
@@ -511,9 +507,7 @@ Las métricas de seguridad presentaron la mayor dispersión del instrumento. El 
 % Exportar del informe de Microsoft Forms y guardar en img/
 % Nombre sugerido: fig5_3_seguridad_diferenciacion.png
 % =========================================================
-\begin{center}
-\textit{[Insertar Figura~5.3: Gráfico de barras --- Distribución de respuestas en métricas de seguridad y diferenciación de perfil técnico. Fuente: informe de Microsoft Forms.]}
-\end{center}
+\imagen{figura5-3.png}{Distribución de respuestas en métricas de seguridad y diferenciación de perfil técnico}{false}{Elaboración propia}{0.3}{V}
 
 \section{Casos de Uso y Verificación Funcional}
 
