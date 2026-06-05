@@ -370,27 +370,29 @@
         \vspace*{\fill}
         
         %SEXO DEL LECTOR O LECTORA
-        \ifdefined\sexoLector
-            \ifthenelse{\equal{\sexoLector}{}}{\textcolor{red}{
-            \MakeUppercase{ERROR: No se ha ingresado el sexo del lector}}}{
-                \ifthenelse{\equal{\sexoLector}{masculino}}{
-                    \MakeUppercase{lector}
-                }{
-                    \ifthenelse{\equal{\sexoLector}{femenino}}{
-                        \MakeUppercase{lectora}
+        \ifdefined\lector
+            \ifdefined\sexoLector
+                \ifthenelse{\equal{\sexoLector}{}}{\textcolor{red}{
+                \MakeUppercase{ERROR: No se ha ingresado el sexo del lector}}}{
+                    \ifthenelse{\equal{\sexoLector}{masculino}}{
+                        \MakeUppercase{lector}
                     }{
-                        \textcolor{red}{
-                            \MakeUppercase{ERROR: El sexo del lector solo puede ser "masculino" o "femenino"}
+                        \ifthenelse{\equal{\sexoLector}{femenino}}{
+                            \MakeUppercase{lectora}
+                        }{
+                            \textcolor{red}{
+                                \MakeUppercase{ERROR: El sexo del lector solo puede ser "masculino" o "femenino"}
+                            }
                         }
                     }
-                }
-            }\par
-        \else
-            \textcolor{red}{\MakeUppercase{ERROR: El comando sexoLector no está definido}}\par
+                }\par
+            \else
+                \textcolor{red}{\MakeUppercase{ERROR: El comando sexoLector no está definido}}\par
+            \fi
+            
+            %NOMBRE DEL LECTOR O LECTORA
+            \verificarvacio{\lector}{ERROR:No se ha ingresado el nombre del lector}{ERROR: El comando lector no está definido}\par
         \fi
-        
-        %NOMBRE DEL LECTOR O LECTORA
-        \verificarvacio{\lector}{ERROR:No se ha ingresado el nombre del lector}{ERROR: El comando lector no está definido}\par
         }
 {
     \end{portadas} %Se termina entorno de portadas
