@@ -490,7 +490,7 @@ Los resultados en las dimensiones de calidad de las respuestas presentan un pano
 % TABLA 5.1 - Resumen Likert del instrumento de evaluación
 % =========================================================
 \tabla{V}{
-  \begin{longtable}{|p{8cm}|c|c|c|c|c|}
+  \begin{longtable}{|p{6.8cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|}
     \caption{Distribución de respuestas Likert del instrumento de evaluación del prototipo}\label{tab:resumen_evaluacion}\\
     \hline
     \textbf{Ítem evaluado} & \textbf{MDA} & \textbf{LDA} & \textbf{N} & \textbf{LDE} & \textbf{MDE} \\
@@ -527,8 +527,8 @@ Los resultados en las dimensiones de calidad de las respuestas presentan un pano
     \hline
     Las recomendaciones incluyeron advertencias de seguridad cuando eran necesarias & 1 & 1 & 2 & 1 & 0 \\
     \hline
-    \multicolumn{6}{l}{\small \textit{Nota:} MDA~=~Muy de acuerdo; LDA~=~Ligeramente de acuerdo; N~=~Neutral; LDE~=~Ligeramente en desacuerdo; MDE~=~Muy en desacuerdo.}\\
-    \multicolumn{6}{l}{\small Fuente: Elaboración propia (2026), basada en instrumento de evaluación aplicado a cinco técnicos HVAC.}\\
+    \multicolumn{6}{p{14.6cm}}{\footnotesize\textit{Nota:} MDA~=~Muy de acuerdo; LDA~=~Ligeramente de acuerdo; N~=~Neutral; LDE~=~Ligeramente en desacuerdo; MDE~=~Muy en desacuerdo.}\\
+    \multicolumn{6}{p{14.6cm}}{\footnotesize Fuente: Elaboración propia (2026), basada en instrumento de evaluación aplicado a cinco técnicos HVAC.}\\
   \end{longtable}
 }
 
@@ -684,6 +684,7 @@ Se recomienda la implementación de \textit{guardrails} de seguridad como capa d
           \begingroup
           \renewcommand{\thetable}{\Alph{anexosletra}.\arabic{table}}
           \setcounter{table}{0}
+          \captionsetup{list=no}
           \begin{longtable}{|p{7.5cm}|p{7.5cm}|}
             \caption{Catálogo de fallas comunes en aires acondicionados tipo Split}\label{tab:anexoA_catalogo_fallas}\\
             \hline
