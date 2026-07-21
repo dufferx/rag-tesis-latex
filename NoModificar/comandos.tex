@@ -341,7 +341,7 @@
             %Se valida que el tercer parametro no este vacio, el tercer parametro corresponde a la escala que tendra la figura, si el parametro esta vacío entonces se coloca 1 por defecto
             \ifthenelse{\equal{#5}{}}{
                 \begin{figure}[H]
-                \vspace{2\baselineskip}
+                \vspace{0pt}
                 \centering
                 \includegraphics[scale=1]{img/#1}
                 \ifthenelse{\equal{#3}{true}}{
@@ -354,7 +354,7 @@
             }{
             %Si no esta vacio entonces se coloca el valor que se escribio en el tercer parametro
                 \begin{figure}[H]
-                \vspace{2\baselineskip}
+                \vspace{0pt}
                 \centering
                 \includegraphics[scale=#5]{img/#1}
                 \ifthenelse{\equal{#3}{true}}{

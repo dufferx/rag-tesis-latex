@@ -54,12 +54,12 @@
 %\newcommand{\carreraDos}{energetica}
 %\newcommand{\carreraTres}{industrial}
 
-\autor{Rodrigo Andrés Mena Caballero}{M}{carreraUno} % Autor 1
-\autor{Duglas Fernando Pineda Fuentes}{M}{carreraUno} % Autor 2 (opcional)
-\autor{Mario Antonio Martinez Villatoro}{M}{carreraUno} % Autor 3 (opcional)
+\autor{Mario Antonio Martinez Villatoro}{M}{carreraUno} % Autor 1
+\autor{Rodrigo Andrés Mena Caballero}{M}{carreraUno} % Autor 2 (opcional)
+\autor{Duglas Fernando Pineda Fuentes}{M}{carreraUno} % Autor 3 (opcional)
 \autor{}{}{} % Autor 4 (opcional)
 
-\newcommand{\mesdegraduacion}{Junio 2026} % Mes y año de graduación
+\newcommand{\mesdegraduacion}{Octubre 2026} % Mes y año de graduación
 
 %================================================================
 %            Sección editable para segunda portada
@@ -342,7 +342,13 @@ En el proyecto propuesto, el flujo es el siguiente: el técnico formula una cons
 
 Este enfoque permite cumplir con el requisito identificado en las entrevistas: mostrar información específica del fabricante y pasos numerados directamente desde el manual. Como se ilustra en la \reffig{diagrama1.png}, el flujo del sistema se divide en una etapa de recuperación semántica y una etapa de generación fundamentada, ambas orquestadas por el framework LlamaIndex como capa de integración.
 
-\imagen{diagrama1.png}{Arquitectura del Sistema de Generación Aumentada por Recuperación (RAG)}{false}{Elaboración propia}{0.35}{V}
+\begin{figure}[H]
+\vspace*{-2.5cm}
+\centering
+\makebox[\linewidth][c]{\includegraphics[scale=0.44]{img/diagrama1.png}}
+\caption{Arquitectura del Sistema de Generación Aumentada por Recuperación (RAG). Fuente: [Elaboración propia]}
+\label{fig:diagrama1.png}
+\end{figure}
 
 \section{Framework LlamaIndex}
 
@@ -661,7 +667,11 @@ Se recomienda la implementación de \textit{guardrails} de seguridad como capa d
 
     \anexo{Catálogo de Fallas Comunes en Aires Acondicionados tipo Split}{
         \tabla{V}{
+          \begingroup
+          \renewcommand{\thetable}{\Alph{anexosletra}.\arabic{table}}
+          \setcounter{table}{0}
           \begin{longtable}{|p{7.5cm}|p{7.5cm}|}
+            \caption{Catálogo de fallas comunes en aires acondicionados tipo Split}\label{tab:anexoA_catalogo_fallas}\\
             \hline
             \textbf{Síntoma Observable} & \textbf{Posible Causa} \\
             \hline
@@ -703,7 +713,9 @@ Se recomienda la implementación de \textit{guardrails} de seguridad como capa d
             \hline
             El compresor no inicia & Falla de arranque del compresor \\
             \hline
+            \multicolumn{2}{l}{\small Fuente: Elaboración propia (2026), con base en manuales de servicio de los fabricantes analizados.} \\
           \end{longtable}
+          \endgroup
         }
     }
 

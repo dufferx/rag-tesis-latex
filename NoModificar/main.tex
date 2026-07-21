@@ -77,7 +77,7 @@
 
 \renewcommand{\cftfigpresnum}{Figura~} %Agrega la palabra "Figura" al inicio de cada una de las entradas del indice de figuras
 
-\setlength{\cftfignumwidth}{1.1cm} %Espacio reservado para la palabra "Figura" junto con el numero del capitulo y numero correlativo
+\setlength{\cftfignumwidth}{2.2cm} %Espacio reservado para la palabra "Figura" junto con el numero del capitulo y numero correlativo
 
 %=========Modificacion de formato de indice de tablas============%
 
@@ -91,11 +91,6 @@
 
 %====== Forzar que en los índices aparezca "Figura" y "Tabla" ======
 \makeatletter
-\renewcommand*{\l@figure}[2]{%
-  {\fontsize{11}{16.5}\selectfont
-   \@dottedtocline{1}{0pt}{1.1cm}{Figura~#1}{#2}%
-  }%
-}
 \renewcommand*{\l@table}[2]{%
   {\fontsize{11}{16.5}\selectfont
    \@dottedtocline{1}{0pt}{1.1cm}{Tabla~#1}{#2}%
