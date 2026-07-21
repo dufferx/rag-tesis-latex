@@ -398,9 +398,23 @@ Finalmente, los documentos seleccionados fueron sometidos a un esquema de evalua
 
 En esta fase se llevó a cabo el diseño, construcción y configuración del motor de la solución tecnológica, integrando los componentes de la arquitectura de RAG mediante el uso del framework LlamaIndex Core (versión 0.14.21) como orquestador principal.
 
-La arquitectura definitiva del prototipo, integrando la interfaz web implementada con React (versión 19.2.4) y Vite (versión 8.0.1), el backend desarrollado con FastAPI (versión 0.115.12), el motor de ingesta, la base vectorial, la capa de persistencia local y los servicios externos de Gemini consumidos mediante Google GenAI SDK (versión 1.73.1), se ilustra en la \reffig{diagrama2.jpg}. Esta representación permite observar el flujo completo entre la consulta del técnico, la recuperación documental, la generación de respuestas fundamentadas y la entrega de evidencias visuales asociadas al manual consultado.
+La arquitectura definitiva del prototipo integra la interfaz web implementada con React (versión 19.2.4) y Vite (versión 8.0.1), el backend desarrollado con FastAPI (versión 0.115.12), el motor de ingesta, la base vectorial, la capa de persistencia local y los servicios externos de Gemini consumidos mediante Google GenAI SDK (versión 1.73.1). Dada la extensión del diagrama, se presenta en dos vistas complementarias que conservan la continuidad del flujo mediante las conexiones etiquetadas \textit{BackgroundTasks} y \textit{consulta RAG}. La primera vista, mostrada en la \reffig{diagrama2-a.jpg}, corresponde a las capas de interacción con el usuario (frontend SPA) y de orquestación en el backend, donde se observa el flujo de peticiones desde el navegador del técnico hacia la API y el servidor de archivos estáticos.
 
-\imagen{diagrama2.jpg}{Arquitectura Final del Sistema RAG para diagnóstico de HVAC}{false}{Elaboración propia}{0.19}{V}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{img/diagrama2-a.jpg}
+\caption[Arquitectura Final del Sistema RAG para diagnóstico de HVAC. Vista 1: capas de usuario y backend]{Arquitectura Final del Sistema RAG para diagnóstico de HVAC. Vista 1: capas de usuario y backend. Fuente: [Elaboración propia]}
+\label{fig:diagrama2-a.jpg}
+\end{figure}
+
+La segunda vista, presentada en la \reffig{diagrama2-b.jpg}, detalla el motor de recuperación aumentada (ingesta y consulta RAG), la capa de persistencia local (SQLite, imágenes extraídas, manuales PDF e índice vectorial ChromaDB) y los servicios externos de Gemini en la nube. En conjunto, ambas vistas permiten observar el flujo completo entre la consulta del técnico, la recuperación documental, la generación de respuestas fundamentadas y la entrega de evidencias visuales asociadas al manual consultado.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{img/diagrama2-b.jpg}
+\caption[Arquitectura Final del Sistema RAG para diagnóstico de HVAC. Vista 2: motor RAG, persistencia y servicios externos]{Arquitectura Final del Sistema RAG para diagnóstico de HVAC. Vista 2: motor RAG, persistencia y servicios externos. Fuente: [Elaboración propia]}
+\label{fig:diagrama2-b.jpg}
+\end{figure}
 
 A diferencia de un enfoque estático, la configuración del sistema fue determinada a partir de un proceso iterativo de experimentación y validación empírica, sustentado en la ejecución de un plan de pruebas técnicas sobre el pipeline completo. Dichas pruebas abarcaron desde la ingesta de documentos hasta la generación final de respuestas, permitiendo identificar la interdependencia entre las decisiones de diseño en cada etapa del sistema .
 
@@ -475,8 +489,8 @@ Los resultados en las dimensiones de calidad de las respuestas presentan un pano
 % =========================================================
 % TABLA 5.1 - Resumen Likert del instrumento de evaluación
 % =========================================================
-\tabla{H}{
-  \begin{longtable}{|p{9cm}|c|c|c|c|c|}
+\tabla{V}{
+  \begin{longtable}{|p{8cm}|c|c|c|c|c|}
     \caption{Distribución de respuestas Likert del instrumento de evaluación del prototipo}\label{tab:resumen_evaluacion}\\
     \hline
     \textbf{Ítem evaluado} & \textbf{MDA} & \textbf{LDA} & \textbf{N} & \textbf{LDE} & \textbf{MDE} \\
@@ -534,14 +548,14 @@ La métrica sobre fuentes relevantes mostradas al usuario obtuvo tres respuestas
 
 El ítem con mayor dispersión de respuestas fue \textit{``El asistente entendió correctamente las preguntas realizadas''}, donde cuatro usuarios respondieron \textit{Muy de acuerdo} y un usuario respondió \textit{Muy en desacuerdo}, tal como se ilustra en la Figura~5.2.
 
+Este único caso de disconformidad severa corresponde a la sesión en la que se evaluó el manual Mabe Tundra Inverter Series. El análisis de las preguntas formuladas por dicho participante revela que las consultas empleadas fueron altamente coloquiales y escuetamente formuladas: \textit{``La unidad evaporada se congela''}, sin especificación de síntomas adicionales, condiciones ambientales ni historial previo del equipo. Este tipo de consulta omite el contexto técnico mínimo necesario para que el recuperador identifique fragmentos diagnósticos de alta relevancia: una frase breve sin vocabulario técnico especializado genera vectores de consulta que no se alinean con precisión a los fragmentos del manual, produciéndose respuestas más genéricas que el usuario percibe como falta de comprensión. Este patrón es consistente con los resultados de las pruebas funcionales de nivel avanzado, donde consultas coloquiales similares produjeron los puntajes de similitud más bajos de toda la batería de recuperación, limitando a su vez la calidad de la síntesis generada por el modelo.
+
 % =========================================================
 % FIGURA 5.2 - Gráfico de pastel: comprensión de preguntas
 % Exportar del informe de Microsoft Forms y guardar en img/
 % Nombre sugerido: fig5_2_comprension_preguntas.png
 % =========================================================
 \imagen{figura5-2.png}{Distribución de respuestas para el ítem ``El asistente entendió correctamente las preguntas realizadas''}{false}{Elaboración propia}{0.3}{V}
-
-Este único caso de disconformidad severa corresponde a la sesión en la que se evaluó el manual Mabe Tundra Inverter Series. El análisis de las preguntas formuladas por dicho participante revela que las consultas empleadas fueron altamente coloquiales y escuetamente formuladas: \textit{``La unidad evaporada se congela''}, sin especificación de síntomas adicionales, condiciones ambientales ni historial previo del equipo. Este tipo de consulta omite el contexto técnico mínimo necesario para que el recuperador identifique fragmentos diagnósticos de alta relevancia: una frase breve sin vocabulario técnico especializado genera vectores de consulta que no se alinean con precisión a los fragmentos del manual, produciéndose respuestas más genéricas que el usuario percibe como falta de comprensión. Este patrón es consistente con los resultados de las pruebas funcionales de nivel avanzado, donde consultas coloquiales similares produjeron los puntajes de similitud más bajos de toda la batería de recuperación, limitando a su vez la calidad de la síntesis generada por el modelo.
 
 Adicionalmente, el mismo participante indicó \textit{Muy en desacuerdo} ante el ítem \textit{``Las respuestas parecieron estar basadas en el manual cargado''}, lo que sugiere que cuando el sistema produce una respuesta genérica ante una consulta imprecisa, el usuario no percibe la trazabilidad con el documento fuente, aunque técnicamente el sistema sí recuperó fragmentos del manual. Este hallazgo señala la necesidad futura de implementar mecanismos de retroalimentación iterativa que orienten al usuario hacia formulaciones más estructuradas cuando la consulta inicial resulta demasiado ambigua para una recuperación semántica precisa.
 
