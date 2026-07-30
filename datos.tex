@@ -29,6 +29,10 @@
 \input{comandos}
 %\usepackage{showframe} % Paquete para mostrar márgenes del documento
 
+% Corrige el nombre global de los epígrafes sin modificar la plantilla protegida.
+% Se aplica al iniciar el documento para prevalecer sobre la configuración de main.tex.
+\AtBeginDocument{\captionsetup[figure]{name=Figura}}
+
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 % ================================================================
 %            Sección editable para primera portada
@@ -54,9 +58,9 @@
 %\newcommand{\carreraDos}{energetica}
 %\newcommand{\carreraTres}{industrial}
 
-\autor{Mario Antonio Martinez Villatoro}{M}{carreraUno} % Autor 1
-\autor{Rodrigo Andrés Mena Caballero}{M}{carreraUno} % Autor 2 (opcional)
-\autor{Duglas Fernando Pineda Fuentes}{M}{carreraUno} % Autor 3 (opcional)
+\autor{Mario Antonio Martinez Villatoro}{H}{carreraUno} % Autor 1
+\autor{Rodrigo Andrés Mena Caballero}{H}{carreraUno} % Autor 2 (opcional)
+\autor{Duglas Fernando Pineda Fuentes}{H}{carreraUno} % Autor 3 (opcional)
 \autor{}{}{} % Autor 4 (opcional)
 
 \newcommand{\mesdegraduacion}{Octubre 2026} % Mes y año de graduación
